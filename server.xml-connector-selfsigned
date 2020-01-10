@@ -1,0 +1,8 @@
+ <Connector port="443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true">
+        <SSLHostConfig>
+            <Certificate certificateKeyFile="conf/key.pem"
+                         certificateFile="conf/crt.crt"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>
