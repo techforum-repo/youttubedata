@@ -1,0 +1,21 @@
+/content/dam/test/file-sample_150kB.pdf/jcr:content/metadata
+
+var workflowData = workItem.getWorkflowData();
+if (workflowData.getPayloadType() == "JCR_PATH") {
+var path = workflowData.getPayload().toString();
+var node = workflowSession.getSession().getItem(path);
+
+var jcrtitle = node.getProperty("jcr:title");
+
+  if(jcrtitle!=null)
+  {
+node.setProperty("dc:title", jcrtitle.toString());        
+  }else
+  {
+node.setProperty("dc:title", null);    
+  }
+
+node.save();
+}
+
+Exclude List: dam:(.*),dc:(.*),jcr:description,jcr:language,jcr:lastModified,jcr:lastModifiedBy,pdf:(.*),xmp:(.*)
