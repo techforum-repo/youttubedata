@@ -1,0 +1,19 @@
+#!/usr/bin/env groovy
+// setup connection
+def url = new URL("https://test.albinsblog.com/content/we-retail/us/en.html?id="+Math.random())
+for(int i = 0;i<150;i++) {
+        def connection = url.openConnection()
+        println connection.responseCode
+        if(connection.responseCode == 200){
+                 println "Connection successful"
+        }
+        else{
+                 println "Ouchy! Error!"
+        }
+}
+
+
+/content/we-retail/us/en.html?%20or%20(1,2)=(select*from(select%20name_const(CHAR(71,79,97,65,111,105,97,119,105),1),name_const(CHAR(71,79,97,65,111,105,97,119,105),1))a)%20--%20and%201=1
+
+
+keytool -import -trustcacerts -alias test.albinsblog.vom -file "C:\Albin\blogData\WAF\cert.cer" -keystore "C:\Program Files\Java\jdk1.8.0_51\jre\lib\security\cacerts"
