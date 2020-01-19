@@ -1,0 +1,40 @@
+const mongoose = require('mongoose');
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc';
+const key = 'passwordpasswordpasswordpassword';
+const iv = 'vectorvector1234';
+
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    default: ''
+  },
+  password: {
+    type: String,
+    default: ''
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  },
+  signUpDate: {
+    type: Date,
+    default: Date.now()
+  }
+});
+UserSchema.methods.generateHash = function(password) {
+  //return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);  
+  let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), Buffer.from(iv));
+  let crypted = cipher.update(password, 'utf8', 'hex');
+  crypted += cipher.final('hex');
+  return crypted;
+};
+UserSchema.methods.validPassword = function(password) {
+	
+  //return bcrypt.compareSync(password, this.password);
+let decipher = crypto.createDecipheriv(algorithm,Buffer.from(key), Buffer.from(iv));
+let dec = decipher.update(this.password, 'hex', 'utf8');
+dec += decipher.final();
+return (password==dec);
+};
+module.exports = mongoose.model('User', UserSchema);
