@@ -1,0 +1,48 @@
+Node.JS
+
+index.js
+
+
+"use strict";
+
+const config = require("./config.js");
+
+exports.handler = (event, context, callback) => {
+  const cfRequest = event.Records[0].cf.request;
+
+  // Construct the auth string
+  const authString =
+    `Basic ${new Buffer(`${config.authUser}:${config.authPass}`).toString("base64")}`;
+
+  // Add auth header
+  if (
+    typeof cfRequest.headers.authorization === "undefined" ||
+    cfRequest.headers.authorization[0].value !== authString
+  ) {
+    const response = {
+      status: "401",
+      statusDescription: "Unauthorized",
+      body: "Unauthorized",
+      headers: {
+        "www-authenticate": [{ key: "WWW-Authenticate", value: "Basic" }]
+      }
+    };
+    callback(null, response);
+    return;
+  }
+
+  // Continue request processing if authentication passed
+  callback(null, cfRequest);
+};
+
+
+config.js
+
+
+"use strict";
+
+module.exports = {
+  authUser: "testuser",
+  authPass: "testuserpass!"
+ 
+};
