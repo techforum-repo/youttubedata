@@ -1,3 +1,3 @@
-npm install
-yarn
-yarn run start
+npm install <br />
+yarn <br />
+yarn run start <br />
