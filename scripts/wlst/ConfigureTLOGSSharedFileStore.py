@@ -23,17 +23,17 @@ connect(adminUserName, adminPassword, adminURL)
 edit()
 startEdit()
 
-adminserverDir = File(wlsDomain+'/SOACoreDomain/soa_cluster/tlogs')
+adminserverDir = File(wlsDomain+'/cluster1/tlogs')
 bool = adminserverDir.mkdirs()
 
 cd('/Servers/MS1/DefaultFileStore/MS1')
-cmo.setDirectory(wlsDomain+'/SOACoreDomain/soa_cluster/tlogs')
+cmo.setDirectory(wlsDomain+'/cluster_1/tlogs')
 
 cd('/Servers/MS2/DefaultFileStore/MS2')
-cmo.setDirectory(wlsDomain+'/SOACoreDomain/soa_cluster/tlogs')
+cmo.setDirectory(wlsDomain+'/cluster_1/tlogs')
 
 cd('/Servers/MS3/DefaultFileStore/MS3')
-cmo.setDirectory(wlsDomain+'/SOACoreDomain/soa_cluster/tlogs')
+cmo.setDirectory(wlsDomain+'/cluster_1/tlogs')
 
 save()
 activate()
