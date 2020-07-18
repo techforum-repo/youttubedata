@@ -1,0 +1,66 @@
+{
+  "jcr:primaryType": "sling:Folder",
+  "jcr:createdBy": "admin",
+  "jcr:created": "Sun Jul 05 2020 15:13:00 GMT-0500",
+  "www.example1.com": {
+    "jcr:primaryType": "sling:Mapping",
+    "jcr:createdBy": "admin",
+    "jcr:created": "Fri Jul 17 2020 15:00:57 GMT-0500",
+    "sling:internalRedirect": [
+      "/content/wknd/us"
+    ],
+    "redirect": {
+      "jcr:primaryType": "sling:Mapping",
+      "jcr:createdBy": "admin",
+      "jcr:created": "Fri Jul 17 2020 16:21:47 GMT-0500",
+      "sling:match": "(.+)$",
+      "sling:internalRedirect": [
+        "/content/wknd/us/$1",
+        "/$1"
+      ]
+    },
+    "sitemap_mapping": {
+      "jcr:primaryType": "sling:Mapping",
+      "jcr:createdBy": "admin",
+      "jcr:created": "Fri Jul 17 2020 16:21:47 GMT-0500",
+      "sling:match": "content/wknd/us/sitemap.xml",
+      "sling:internalRedirect": [
+        "/content/wknd/sitemap.xml"
+      ]
+    },
+    "reverse_no_html": {
+      "jcr:primaryType": "sling:Mapping",
+      "jcr:createdBy": "admin",
+      "jcr:created": "Fri Jul 17 2020 16:21:47 GMT-0500",
+      "sling:match": "$1/",
+      "sling:internalRedirect": [
+        "/content/wknd/us/(.*).html"
+      ]
+    },
+    "external_redirect": {
+      "jcr:primaryType": "sling:Mapping",
+      "jcr:createdBy": "admin",
+      "sling:redirect": "https://www.albinsblog.com",
+      "jcr:created": "Fri Jul 17 2020 16:21:47 GMT-0500",
+      "sling:match": "content/wknd/us/test.html"
+    }
+  },
+  "www.example2.com": {
+    "jcr:primaryType": "sling:Mapping",
+    "jcr:createdBy": "admin",
+    "jcr:created": "Fri Jul 17 2020 15:00:57 GMT-0500",
+    "sling:internalRedirect": [
+      "/content/wknd/ca"
+    ],
+    "redirect": {
+      "jcr:primaryType": "sling:Mapping",
+      "jcr:createdBy": "admin",
+      "jcr:created": "Fri Jul 17 2020 16:21:47 GMT-0500",
+      "sling:match": "(.+)$",
+      "sling:internalRedirect": [
+        "/content/wknd/ca/$1",
+        "/$1"
+      ]
+    }
+  }
+}
