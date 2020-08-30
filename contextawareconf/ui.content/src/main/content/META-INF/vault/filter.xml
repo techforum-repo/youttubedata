@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/contextawareconf" mode="merge"/>
+    <filter root="/content/contextawareconf" mode="merge"/>
+    <filter root="/content/dam/contextawareconf" mode="merge"/>
+    <filter root="/content/experience-fragments/contextawareconf" mode="merge"/>
+</workspaceFilter>

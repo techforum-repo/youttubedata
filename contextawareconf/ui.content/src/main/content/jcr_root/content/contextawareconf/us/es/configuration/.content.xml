@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2020-08-30T11:02:12.027-05:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/apps/contextawareconf/templates/configuration-page"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Configuration"
+        sling:resourceType="wcm-io/caconfig/editor/components/page/editor"/>
+</jcr:root>
