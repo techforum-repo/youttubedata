@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/renderconditins" mode="merge"/>
+    <filter root="/content/renderconditins" mode="merge"/>
+    <filter root="/content/dam/renderconditins" mode="merge"/>
+    <filter root="/content/experience-fragments/renderconditins" mode="merge"/>
+</workspaceFilter>
