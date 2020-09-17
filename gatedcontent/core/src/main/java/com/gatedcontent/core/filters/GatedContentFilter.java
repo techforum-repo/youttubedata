@@ -39,6 +39,8 @@ public class GatedContentFilter implements Filter {
         final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) servletResponse;
         final  GatedFilterInfo filterInfo = gatedContentService.getGatedFilterInfo(slingRequest);
         final WCMMode mode = fromRequest(servletRequest);
+        
+        System.out.println("mode: "+mode);
 
         setHeaderToSkipDispatcherCache(filterInfo.getGatedResource(), slingResponse);
 

@@ -11,12 +11,12 @@
             fieldLabel="Form Name"
             name="./formName"
             required="{Boolean}true"/>
-        <formEndpoint
+        <redirectLocation
             cq:showOnCreate="{Boolean}true"
             jcr:primaryType="nt:unstructured"
             sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-            fieldLabel="Form Location"
-            name="./formEndpoint"
+            fieldLabel="Default Redirect Location"
+            name="./redirectLocation"
             required="{Boolean}true"
             rootPath="/content"/>
     </items>

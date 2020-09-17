@@ -26,7 +26,7 @@ public class GatedFormDataProcessor {
 	private final Logger LOGGER = LoggerFactory.getLogger(GatedFormDataProcessor.class);
 	private static final String FORM_NAME = "formName";
 	private static final String GATED_URL_PARAM = "gatedURL";
-	private static final String FORM_ENDPOINT = "formEndpoint";
+	private static final String FORM_ENDPOINT = "redirectLocation";
 	
 
 	@Reference
