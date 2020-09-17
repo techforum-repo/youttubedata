@@ -42,7 +42,7 @@ public class GatedContentFilter implements Filter {
 
         setHeaderToSkipDispatcherCache(filterInfo.getGatedResource(), slingResponse);
 
-        if (filterInfo.isGate() /**&& DISABLED.equals(mode)**/) {
+        if (filterInfo.isGate() && DISABLED.equals(mode)) {
             redirectToGate(slingResponse, filterInfo);            
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
