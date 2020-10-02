@@ -14,19 +14,10 @@
 
 String[] servicePaths = pageProperties.getInherited("cq:cloudserviceconfigs", new String[] {});
 if (servicePaths.length > 0) {
-    ResourceResolver resolver = resource.getResourceResolver();
-    ConfigurationManager cfgMgr = resolver.adaptTo(ConfigurationManager.class);
-    Iterator<Service> services = cfgMgr.getServices(servicePaths, new Comparator<Service>() {
-        //sort ascending by inclusionRank
-        public int compare(Service s1, Service s2) {
-            return s1.getInclusionRank().compareTo(s2.getInclusionRank());
-        }
-    });
 
     // scripts 
-    List<String> libsScripts=sling.getService(GetLibScripts.class).getScripts(services,"head");
-     for (String script : libsScripts) {
-
+    List<String> libsScripts=sling.getService(GetLibScripts.class).getScripts(servicePaths,"head");
+     for (String script : libsScripts) {  
     	%><cq:include script="<%=script%>"/><%
     }
 }
