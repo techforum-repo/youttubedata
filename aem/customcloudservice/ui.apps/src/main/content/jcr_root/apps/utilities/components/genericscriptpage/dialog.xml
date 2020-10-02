@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Generic Script Configuration"
+    xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <panel
+            jcr:primaryType="cq:Panel"
+            title="Script Configuration"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <headScript
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Head Script"
+                    name="./headScript"
+                    xtype="textarea"/>
+                <footScript
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Foot Script"
+                    name="./footScript"
+                    xtype="textarea"/>
+            </items>
+        </panel>
+    </items>
+</jcr:root>

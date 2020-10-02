@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Content-Package-Id: my_packages:custom-script-injection:1.0
+Content-Package-Roots: /apps/utilities,/etc/cloudservices/generic-script
+Content-Package-Type: mixed
+

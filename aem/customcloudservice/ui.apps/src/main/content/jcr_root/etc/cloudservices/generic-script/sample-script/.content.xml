@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:cloudservicename="genericscript"
+        cq:lastModified="{Date}2020-09-30T17:41:41.318-05:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/apps/utilities/templates/genericscript"
+        jcr:lastModified="{Date}2020-09-30T17:41:41.308-05:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="sample-script"
+        sling:resourceType="/apps/utilities/components/genericscriptpage"
+        footScript="&lt;script>alert('Footer')&lt;/script>"
+        headScript="&lt;script>alert('header')&lt;/script>"
+        thumbnailPath="/apps/utilities/templates/genericscript/thumbnail.png"/>
+</jcr:root>

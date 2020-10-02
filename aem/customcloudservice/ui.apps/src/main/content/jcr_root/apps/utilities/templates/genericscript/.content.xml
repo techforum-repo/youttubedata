@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:description="Generic Script Configuration"
+    jcr:primaryType="cq:Template"
+    jcr:title="Generic Script Configuration"
+    allowedChildren="[utilities/components/genericscriptpage]"
+    allowedPaths="[/etc/cloudservices/generic-script(/.*)?]"
+    ranking="{Long}100">
+    <jcr:content
+        cq:cloudservicename="genericscript"
+        jcr:primaryType="cq:PageContent"
+        sling:resourceType="/apps/utilities/components/genericscriptpage"
+        thumbnailPath="/apps/utilities/templates/genericscript/thumbnail.png"/>
+</jcr:root>
