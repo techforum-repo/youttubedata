@@ -24,7 +24,7 @@
     <parent>
         <groupId>redirectmanager</groupId>
         <artifactId>redirectmanager</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -174,13 +174,13 @@
         <dependency>
             <groupId>redirectmanager</groupId>
             <artifactId>redirectmanager.ui.apps</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>redirectmanager</groupId>
             <artifactId>redirectmanager.ui.content</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
             <type>zip</type>
         </dependency>
 
