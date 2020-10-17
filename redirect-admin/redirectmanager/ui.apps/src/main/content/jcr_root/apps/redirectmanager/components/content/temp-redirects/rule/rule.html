@@ -1,0 +1,16 @@
+<table data-sly-test="${!properties.source}" style="border-collapse:collapse" border="1" width="90%" align="center">
+    <tr>
+        <td width="100%"><mark>Empty 302 rule</mark></td>
+    </tr>
+</table>
+<sly data-sly-use.previewRule="redirectmanager.core.models.RuleConfigModel"/>
+<sly data-sly-test.rule="${previewRule.redirectRule}"/>
+
+<sly data-sly-test="${rule.rawSource}">
+    <table style="border-collapse:collapse" border="1" width="90%" align="center">
+        <tr>
+             <td width="40%"><img data-sly-test="${!rule.validSource}" src="/content/dam/redirectmanager/warn.png" height="20" width="20"/>${rule.rawSource}</td>
+             <td width="60%"><img data-sly-test="${!rule.validTarget}" src="/content/dam/redirectmanager/warn.png" height="20" width="20"/>${rule.rawTarget}</td>            
+        </tr>
+    </table>
+</sly>

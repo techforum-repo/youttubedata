@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2020-10-16T21:01:21.838-05:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/conf/redirectmanager/settings/wcm/templates/redirectmanager-template"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="test-site"
+        sling:resourceType="redirectmanager/components/structure/page">
+        <redirects-301 jcr:primaryType="nt:unstructured">
+            <rules
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/parsys">
+                <rule
+                    jcr:created="{Date}2020-10-16T19:29:29.194-05:00"
+                    jcr:createdBy="admin"
+                    jcr:lastModified="{Date}2020-10-16T20:53:42.292-05:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="redirectmanager/components/content/perm-redirects/rule"
+                    source="/test-perm"
+                    target="http://www.test.com"/>
+                <rule_280328056
+                    jcr:created="{Date}2020-10-16T20:56:21.995-05:00"
+                    jcr:createdBy="admin"
+                    jcr:lastModified="{Date}2020-10-16T20:56:47.210-05:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="redirectmanager/components/content/perm-redirects/rule"
+                    source="/test-perm1"
+                    target="/content/redirectmanager"/>
+                <rule_1503997135
+                    jcr:created="{Date}2020-10-16T21:00:38.942-05:00"
+                    jcr:createdBy="admin"
+                    jcr:lastModified="{Date}2020-10-16T21:01:21.832-05:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="redirectmanager/components/content/perm-redirects/rule"
+                    source="/test-perm2"
+                    target="/test/target"/>
+            </rules>
+        </redirects-301>
+        <redirects-302 jcr:primaryType="nt:unstructured">
+            <rules
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/parsys">
+                <rule
+                    jcr:created="{Date}2020-10-16T19:29:35.586-05:00"
+                    jcr:createdBy="admin"
+                    jcr:lastModified="{Date}2020-10-16T20:03:23.294-05:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="redirectmanager/components/content/temp-redirects/rule"
+                    source="/test"
+                    target="http://www.google.com"/>
+            </rules>
+        </redirects-302>
+    </jcr:content>
+</jcr:root>

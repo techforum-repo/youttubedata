@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2020-10-16T19:25:50.134-05:00"
+        cq:lastModifiedBy="admin"
+        cq:policy="redirectmanager/components/structure/page/policy_content_page"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="wcm/core/components/policies/mappings">
+        <root
+            cq:policy="wcm/foundation/components/responsivegrid/content-default"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mapping">
+            <experiencefragment-header
+                cq:policy="redirectmanager/components/content/experiencefragment/policy_header"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/core/components/policies/mapping"/>
+            <experiencefragment-footer
+                cq:policy="redirectmanager/components/content/experiencefragment/policy_footer"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/core/components/policies/mapping"/>
+        </root>
+        <redirects-301 jcr:primaryType="nt:unstructured">
+            <rules
+                cq:policy="wcm/foundation/components/parsys/policy_1602894101538"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/core/components/policies/mapping"/>
+        </redirects-301>
+        <redirects-302 jcr:primaryType="nt:unstructured">
+            <rules
+                cq:policy="wcm/foundation/components/parsys/policy_1741483402718700"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/core/components/policies/mapping"/>
+        </redirects-302>
+    </jcr:content>
+</jcr:root>

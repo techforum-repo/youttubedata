@@ -1,0 +1,17 @@
+
+<div class="page__main">
+    <div class="page__par">
+        <div class="section">            
+                <h3 class="heading">
+                    Redirects Management UI - ${properties['jcr:title']} [${properties.siteId}]
+                </h3>          
+
+        </div>
+        <div class="rule">
+            <div data-sly-resource="${'redirects-301' @ resourceType='redirectmanager/components/content/perm-redirects'}"></div>
+        </div>
+        <div class="rule">
+            <div data-sly-resource="${'redirects-302' @ resourceType='redirectmanager/components/content/temp-redirects'}"></div>
+        </div>
+    </div>
+</div>
