@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/aspectj" mode="merge"/>
+    <filter root="/content/aspectj" mode="merge"/>
+    <filter root="/content/dam/aspectj" mode="merge"/>
+    <filter root="/content/experience-fragments/aspectj" mode="merge"/>
+</workspaceFilter>

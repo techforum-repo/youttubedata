@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/aspectj/clientlibs"/>
+    <filter root="/apps/aspectj/components"/>
+    <filter root="/apps/aspectj/i18n"/>
+</workspaceFilter>
