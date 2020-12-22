@@ -22,8 +22,6 @@ node app.js
 
 ## Demo URL's
 
-Explain how to run the automated tests for this system
-
 ```
 
 Cookies Demo - https://localhost/cookies.html
