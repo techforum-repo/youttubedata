@@ -5,10 +5,9 @@ Demo on different storage types for browsers, the demo project is built on Expre
 
 ## Prerequisites
 
-Node JS/NPM
-
 ```
-Give examples
+Node JS
+NPM
 ```
 
 ### Installing
