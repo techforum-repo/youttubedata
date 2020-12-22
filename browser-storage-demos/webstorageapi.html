@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Browser Storage Demos - Web Storage API </title>	
+		
+		<script type = "text/javascript">
+		
+			if (typeof(Storage) !== "undefined") {
+			
+				function addToStorage()
+				{
+					localStorage.setItem("testlocal", "test Local Data");
+					//localStorage.testlocal= "test Local Data";	
+
+					 sessionStorage.setItem("testsession", "test Session Data");
+					 //sessionStorage.testsession=  "test Session Data";
+
+					 var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+					 localStorage.setItem('testObject', JSON.stringify(testObject));
+				}
+				
+				function removeFromStorage()
+				{
+					localStorage.removeItem("testlocal");
+					//localStorage.clear();
+					sessionStorage.removeItem("testsession");
+					//sessionStorage.clear();
+				}
+				
+				function readDataFromStrage()
+				{
+					
+					document.getElementById("data").innerHTML= "Local Storage Data.."+localStorage.getItem("testlocal")+"<br />";
+					document.getElementById("data").innerHTML+="Session Storage Data.."+sessionStorage.getItem("testsession")+"<br />";
+					var retrievedObject = localStorage.getItem('testObject');
+					document.getElementById("data").innerHTML+="JSON Data From Storage: "+JSON.stringify(retrievedObject);
+				}		
+
+				
+			} else {
+				console.log("No Web Storage support..");		
+			}	
+		</script>			
+	</head>
+	<body>
+		Welcome to Browser Storage Demos - Web Storage API	<br/> 
+
+		<p id="data"></p>
+        <button onclick = "readDataFromStrage()">Read</button>
+        <button onclick = "addToStorage()">Add data </button>
+        <button onclick = "removeFromStorage()">Delete data </button>
+	</body>
+</html>

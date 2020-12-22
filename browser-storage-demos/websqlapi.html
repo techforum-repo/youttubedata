@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Browser Storage Demos - Web SQL API </title>	
+		
+		<script type = "text/javascript">
+		
+			if (window.openDatabase) {
+			  
+				var db;
+				 
+				function createDBAndTable()
+				{
+					db = window.openDatabase('test_db', '1.0', 'Test DB', 1024*1024)
+					db.transaction(function (tx) {
+						tx.executeSql('DROP TABLE IF EXISTS CUSTOMERS');				
+						tx.executeSql('CREATE TABLE IF NOT EXISTS CUSTOMERS(SSN TEXT PRIMARY KEY , NAME TEXT,AGE INTEGER ,EMAIL TEXT)', [], function(tx, result) {
+							console.log(result);
+							console.log('Table created Successfully!');
+
+						}, errorHandler);
+					});
+				}
+				
+				function insertData()
+				{
+					db.transaction(function (tx) { 										
+						 tx.executeSql('INSERT INTO CUSTOMERS(SSN, NAME,AGE,EMAIL) VALUES (?,?,?,?)',["444-44-4444","Bill",35,"bill@company.com"], function(tx,result) {					 
+							console.log("Record Inserted Successfully "+result.insertId );    
+						},errorHandler);
+							
+						 tx.executeSql('INSERT INTO CUSTOMERS(SSN, NAME,AGE,EMAIL) VALUES (?,?,?,?)',["555-55-5555","Test1",32,"test1@company.com"], function(tx,result) {
+						 
+							console.log("Record Inserted Successfully "+result.insertId);
+		
+						},errorHandler);
+					});
+
+				}
+				
+				function readDataFromDB()
+				{
+					
+					db.readTransaction(function (tx) { 			
+					tx.executeSql('SELECT * FROM CUSTOMERS', [], function (tx, results) { 
+						var len = results.rows.length, i; 
+						document.getElementById("data").innerHTML="";
+						for (i = 0; i < len; i++) { 
+						 document.getElementById("data").innerHTML+=" SSN: " +results.rows.item(i).SSN+ " Name: "+results.rows.item(i).NAME+" Age: "+results.rows.item(i).AGE+"<br />"; 
+						} 
+				  
+						},errorHandler);
+					});
+
+				}	
+
+				function updateData()
+				{
+					db.transaction(function (tx) { 										
+						 tx.executeSql('UPDATE CUSTOMERS SET AGE=? WHERE SSN=?',[45,"444-44-4444"], function(tx,result) {					 
+							console.log("Record Updated Successfully" +result);    
+						},errorHandler);				
+						
+					});
+
+				}
+
+				function deleteData()
+				{
+					db.transaction(function (tx) { 										
+						 tx.executeSql('DELETE FROM CUSTOMERS WHERE SSN=?',["444-44-4444"], function(tx,result) {					 
+							console.log("Record Deleted Successfully" +result);    
+						},errorHandler);					
+						
+					});
+
+				}	
+
+				function errorHandler(transaction, error) {
+					console.log('Oops. Error was '+error.message+' (Code '+error.code+')');			
+					return false;
+				}			
+
+				
+			} else {
+				console.log("No Web SQL API support..");		
+			}	
+		</script>			
+	</head>
+	<body>
+		Welcome to Browser Storage Demos - Web SQL API	<br/> 
+
+		<p id="data"></p>
+        <button onclick = "createDBAndTable()">Create DB/Table</button>
+        <button onclick = "insertData()">Insert data </button>
+        <button onclick = "readDataFromDB()">Read data </button>
+		<button onclick = "updateData()">Update data </button>
+		<button onclick = "deleteData()">Delete data </button>
+	</body>
+</html>

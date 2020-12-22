@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Browser Storage Demos - IndexDB API </title>		
+		
+		
+		<script type = "text/javascript">
+		
+			if (window.indexedDB) {		    
+			
+				const customerData = [{ ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+									  { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }];
+				const dbName = "testDB";
+				var db;
+				var request = indexedDB.open(dbName, 2);
+
+				request.onerror = function(event) {
+					console.log("error: ");
+				};
+				
+				request.onsuccess = function(event) {
+					db = request.result;
+					console.log("success: "+ db);
+				};
+
+				request.onupgradeneeded = function(event) {
+					var db = event.target.result;
+
+					// autoIncrement: true
+					var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+					objectStore.createIndex("name", "name", { unique: false });
+					objectStore.createIndex("email", "email", { unique: true });
+					
+					customerData.forEach(function(customer) {
+							objectStore.add(customer);
+					});
+					
+				};
+				
+				function add() {
+				
+					var transaction = db.transaction(["customers"], "readwrite");
+					
+					// Do something when all the data is added to the database.
+					transaction.oncomplete = function(event) {
+						console.log("Add Completed!");
+					};
+
+					transaction.onerror = function(event) {
+						// Don't forget to handle errors!
+					};
+					
+					const customerDataNew = [{ ssn: "777-77-7777", name: "Test2", age: 32, email: "test2@home.org" }];
+					
+					var objectStore = transaction.objectStore("customers");
+					customerDataNew.forEach(function(customer) {
+						var request = objectStore.add(customer);
+						request.onsuccess = function(event) {
+							console.log("Data Added..."+event.target.result);
+						};
+					});
+				}
+				
+				
+				function deleteData()
+				{
+					var request = db.transaction(["customers"], "readwrite")
+									.objectStore("customers")
+									.delete("777-77-7777");
+					request.onsuccess = function(event) {
+					console.log("Record Deleted!");
+					};
+				}
+				
+				function read()
+				{
+					var transaction = db.transaction(["customers"]);
+					var objectStore = transaction.objectStore("customers");
+					var request = objectStore.get("444-44-4444");
+					request.onerror = function(event) {
+						// Handle errors!
+					};
+					request.onsuccess = function(event) {
+						document.getElementById("data").innerHTML = "Name for SSN 444-44-4444 is " + request.result.name;
+					};
+				}
+
+
+				function readAll()
+				{
+				
+					var objectStore = db.transaction("customers").objectStore("customers");
+					
+					console.log(db.transaction("customers"));
+					console.log(objectStore);
+					document.getElementById("data").innerHTML="";
+
+					objectStore.openCursor().onsuccess = function(event) {
+					var cursor = event.target.result;
+						
+						if (cursor) {
+							document.getElementById("data").innerHTML+="SSN: " + cursor.key + " Name: " + cursor.value.name +" Age: " + cursor.value.age+"<br />";
+							cursor.continue();
+						}
+						else {
+							console.log("No more entries!");
+						}
+					};
+				}
+				
+				function update()
+				{
+
+					var objectStore = db.transaction(["customers"], "readwrite").objectStore("customers");
+					var request = objectStore.get("444-44-4444");
+					request.onerror = function(event) {
+					  // Handle errors!
+					};
+					request.onsuccess = function(event) {
+					  // Get the old value that we want to update
+					  var data = event.target.result;
+
+					  // update the value(s) in the object that you want to change
+					  data.age = 42;
+
+					  // Put this updated object back into the database.
+					  var requestUpdate = objectStore.put(data);
+					   requestUpdate.onerror = function(event) {
+						 // Do something with the error
+					   };
+					   requestUpdate.onsuccess = function(event) {
+						 console.log("Success - the data is updated!");
+					   };
+					};	
+				}				
+
+			
+			} else {
+				console.log("No IndexDB support..");		
+			}	
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		Welcome to Browser Storage Demos - IndexDB API	<br/>
+		
+		<p id="data"></p>
+        <button onclick = "read()">Read </button>
+        <button onclick = "readAll()">Read all </button>
+        <button onclick = "add()">Add data </button>
+        <button onclick = "deleteData()">Delete data </button>
+		<button onclick = "update()">Update data </button>
+	
+	</body>
+</html>
