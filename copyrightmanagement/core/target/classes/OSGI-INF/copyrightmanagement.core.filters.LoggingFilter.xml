@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="copyrightmanagement.core.filters.LoggingFilter">
+  <property name="service.vendor" type="String" value="Adobe"/>
+  <property name="service.description" type="String" value="Demo to filter incoming requests"/>
+  <property name="sling.filter.scope" type="String" value="REQUEST"/>
+  <property name="service.ranking" type="Integer" value="-700"/>
+  <service>
+    <provide interface="javax.servlet.Filter"/>
+  </service>
+  <implementation class="copyrightmanagement.core.filters.LoggingFilter"/>
+</scr:component>

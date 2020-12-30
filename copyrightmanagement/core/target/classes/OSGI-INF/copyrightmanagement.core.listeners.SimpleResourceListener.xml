@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="copyrightmanagement.core.listeners.SimpleResourceListener" immediate="true">
+  <property name="service.description" type="String" value="Demo to listen on changes in the resource tree"/>
+  <property name="event.topics" type="String" value="org/apache/sling/api/resource/Resource/*"/>
+  <service>
+    <provide interface="org.osgi.service.event.EventHandler"/>
+  </service>
+  <implementation class="copyrightmanagement.core.listeners.SimpleResourceListener"/>
+</scr:component>

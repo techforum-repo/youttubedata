@@ -1,0 +1,12 @@
+copyrightmanagement\core\schedulers\package-info.class
+copyrightmanagement\core\listeners\SimpleResourceListener.class
+copyrightmanagement\core\servlets\SimpleServlet.class
+copyrightmanagement\core\servlets\package-info.class
+copyrightmanagement\core\filters\package-info.class
+copyrightmanagement\core\models\package-info.class
+copyrightmanagement\core\models\HelloWorldModel.class
+copyrightmanagement\core\listeners\package-info.class
+copyrightmanagement\core\models\CopyrightContentFragmentModel.class
+copyrightmanagement\core\schedulers\SimpleScheduledTask$Config.class
+copyrightmanagement\core\schedulers\SimpleScheduledTask.class
+copyrightmanagement\core\filters\LoggingFilter.class

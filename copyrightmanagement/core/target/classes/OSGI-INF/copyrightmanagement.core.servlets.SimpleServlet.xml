@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="copyrightmanagement.core.servlets.SimpleServlet">
+  <property name="sling.servlet.extensions" type="String" value="txt"/>
+  <property name="sling.servlet.resourceTypes" type="String" value="copyrightmanagement/components/structure/page"/>
+  <property name="service.description" type="String" value="Simple Demo Servlet"/>
+  <property name="sling.servlet.methods" type="String" value="GET"/>
+  <service>
+    <provide interface="javax.servlet.Servlet"/>
+  </service>
+  <implementation class="copyrightmanagement.core.servlets.SimpleServlet"/>
+</scr:component>

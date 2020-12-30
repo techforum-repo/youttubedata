@@ -1,0 +1,46 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1576443269266
+Bundle-Category: copyrightmanagement
+Bundle-Description: "Core bundle for copyrightmanagement"
+Bundle-ManifestVersion: 2
+Bundle-Name: copyrightmanagement - Core
+Bundle-SymbolicName: copyrightmanagement.copyrightmanagement.core
+Bundle-Version: 1.0.0.20191215205429262
+Created-By: 1.8.0_51 (Oracle Corporation)
+Export-Package: copyrightmanagement.core.filters;version="1.0";uses:="
+ javax.servlet",copyrightmanagement.core.listeners;version="1.0";uses:
+ ="org.osgi.service.event",copyrightmanagement.core.models;version="1.
+ 0";uses:="javax.annotation,org.apache.sling.api,org.apache.sling.api.
+ resource,org.apache.sling.models.annotations,org.apache.sling.models.
+ annotations.injectorspecific,org.slf4j",copyrightmanagement.core.sche
+ dulers;version="1.0",copyrightmanagement.core.servlets;version="1.0";
+ uses:="javax.servlet,org.apache.sling.api,org.apache.sling.api.servle
+ ts"
+Import-Package: javax.annotation;version="0.0.0",com.day.cq.commons.in
+ herit;version="[5.7,6)",com.day.cq.wcm.api;version="[1.27,2)",copyrig
+ htmanagement.core.filters;version="[1.0,2)",copyrightmanagement.core.
+ listeners;version="[1.0,2)",copyrightmanagement.core.schedulers;versi
+ on="[1.0,2)",copyrightmanagement.core.servlets;version="[1.0,2)",java
+ x.inject;version="[1.0,2)",javax.jcr;version="[2.0,3)",javax.servlet;
+ version="[3.1,4)",org.apache.sling.api;version="[2.3,3)",org.apache.s
+ ling.api.request;version="[2.4,3)",org.apache.sling.api.resource;vers
+ ion="[2.11,3)",org.apache.sling.api.servlets;version="[2.2,3)",org.ap
+ ache.sling.models.annotations;version="[1.5,2)",org.apache.sling.mode
+ ls.annotations.injectorspecific;version="[1.1,2)",org.apache.sling.se
+ ttings;version="[1.3,2)",org.osgi.service.event;version="[1.3,2)",org
+ .slf4j;version="[1.7,2)"
+Provide-Capability: osgi.service;objectClass:List<String>="java.lang.R
+ unnable",osgi.service;objectClass:List<String>="javax.servlet.Filter"
+ ,osgi.service;objectClass:List<String>="javax.servlet.Servlet",osgi.s
+ ervice;objectClass:List<String>="org.osgi.service.event.EventHandler"
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.compo
+ nent)(version>=1.4.0)(!(version>=2.0.0)))",osgi.ee;filter:="(&(osgi.e
+ e=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/copyrightmanagement.core.filters.LoggingFi
+ lter.xml,OSGI-INF/copyrightmanagement.core.listeners.SimpleResourceLi
+ stener.xml,OSGI-INF/copyrightmanagement.core.schedulers.SimpleSchedul
+ edTask.xml,OSGI-INF/copyrightmanagement.core.servlets.SimpleServlet.x
+ ml
+Sling-Model-Packages: copyrightmanagement.core.models
+Tool: Bnd-4.2.0.201903051501
+

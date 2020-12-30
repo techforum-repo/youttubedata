@@ -1,0 +1,5 @@
+copyrightmanagement\core\models\HelloWorldModelTest.class
+copyrightmanagement\core\servlets\SimpleServletTest.class
+copyrightmanagement\core\listeners\SimpleResourceListenerTest.class
+copyrightmanagement\core\schedulers\SimpleScheduledTaskTest.class
+copyrightmanagement\core\filters\LoggingFilterTest.class

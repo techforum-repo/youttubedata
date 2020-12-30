@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="copyrightmanagement.core.schedulers.SimpleScheduledTask" activate="activate">
+  <property name="scheduler.expression" type="String" value="*/30 * * * * ?"/>
+  <property name="scheduler.concurrent" type="Boolean" value="false"/>
+  <property name="myParameter" type="String" value=""/>
+  <service>
+    <provide interface="java.lang.Runnable"/>
+  </service>
+  <implementation class="copyrightmanagement.core.schedulers.SimpleScheduledTask"/>
+</scr:component>

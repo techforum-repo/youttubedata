@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.2.0" localization="OSGI-INF/l10n/copyrightmanagement.core.schedulers.SimpleScheduledTask$Config">
+  <OCD id="copyrightmanagement.core.schedulers.SimpleScheduledTask$Config" name="A scheduled task" description="Simple demo for cron-job like task with properties">
+    <AD id="scheduler.expression" type="String" name="Cron-job expression" default="*/30\ *\ *\ *\ *\ ?"/>
+    <AD id="scheduler.concurrent" type="Boolean" name="Concurrent task" description="Whether or not to schedule this task concurrently" default="false"/>
+    <AD id="myParameter" type="String" name="A parameter" description="Can be configured in /system/console/configMgr" default=""/>
+  </OCD>
+  <Designate pid="copyrightmanagement.core.schedulers.SimpleScheduledTask">
+    <Object ocdref="copyrightmanagement.core.schedulers.SimpleScheduledTask$Config"/>
+  </Designate>
+</metatype:MetaData>
