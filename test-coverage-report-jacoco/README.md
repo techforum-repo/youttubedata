@@ -31,6 +31,6 @@ The coverage for the individual modules are created under target/site/jacoco.
 
 The aggregated coverage report is uploaded to sonarqube, the report can be viewd from sonarqube once ready.
 
-![Coverage Report All](merged-coverage-report-all.png)
+![Aggregated Coverage Report](aggregated-coverage-report.png)
 
-![Coverage Report All](merged-coverage-report-all.png)
+![Aggregated Coverage Report Sonar](aggregated-coverage-report-sonar.png)
