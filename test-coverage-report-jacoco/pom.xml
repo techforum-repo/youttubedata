@@ -34,6 +34,8 @@
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<cucumber.version>6.9.1</cucumber.version>
 		<junit-jupiter.version>5.7.0</junit-jupiter.version>
+		
+		<sonar.exclusions>**/pom.xml</sonar.exclusions>
 
 	</properties>
 
@@ -64,8 +66,7 @@
 							<configuration>
 								<propertyName>itCoverageAgent</propertyName>
 							</configuration>
-						</execution>
-
+						</execution>						
 					</executions>
 				</plugin>
 
