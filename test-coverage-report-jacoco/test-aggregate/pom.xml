@@ -14,11 +14,6 @@
 	<packaging>jar</packaging>
 	<name>test-aggregate</name>
 	<description>test-aggregate - module to build aggregated coverage report</description>
-
-	<properties>
-		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-	</properties>
-
 	<build>
 		<plugins>
 
@@ -33,6 +28,11 @@
 						<goals>
 							<goal>report-aggregate</goal>
 						</goals>
+						 <configuration>
+             
+                           
+                        </configuration>
+						
 					</execution>
 
 				</executions>
@@ -51,12 +51,14 @@
 			<groupId>com.testcoveragereport</groupId>
 			<artifactId>test-coverage-report-jacoco.module1</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.testcoveragereport</groupId>
 			<artifactId>test-coverage-report-jacoco.module2</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>

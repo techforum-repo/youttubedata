@@ -19,25 +19,28 @@
 	<properties>
 		<sonar.login>admin</sonar.login>
 		<sonar.password>Welcome1</sonar.password>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
 
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 
 
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 		<jacoco.version>0.8.6</jacoco.version>
-		<itCoverageAgent></itCoverageAgent>
-		<sonar.language>java</sonar.language>
-		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-
-		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<cucumber.version>6.9.1</cucumber.version>
 		<junit-jupiter.version>5.7.0</junit-jupiter.version>
 		
-		<sonar.exclusions>**/pom.xml</sonar.exclusions>
-
-	</properties>
+		<itCoverageAgent></itCoverageAgent>
+		<sonar.language>java</sonar.language>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>	
+		<sonar.exclusions>**/pom.xml</sonar.exclusions>		
+		<sonar.scm.provider>git</sonar.scm.provider>
+		<sonar.log.level>TRACE</sonar.log.level>
+		<sonar.verbose>true</sonar.verbose>	
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		
+	 <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/module1/target/site/jacoco/jacoco.xml,${maven.multiModuleProjectDirectory}/module2/target/site/jacoco/jacoco.xml,${maven.multiModuleProjectDirectory}/test-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
 
 	<build>
 
