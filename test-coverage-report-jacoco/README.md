@@ -9,7 +9,7 @@ A sample multi modular maven project demonstrating how to met coverage for unit,
 * test-aggregate: Module to aggregate the coverage reports from all the modules.
 
 
-##Dependencies
+## Dependencies
 
 * Java 11+
 * Maven 3.6.3+
