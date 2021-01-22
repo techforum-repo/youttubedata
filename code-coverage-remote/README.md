@@ -22,6 +22,7 @@ docker-compose up
 ## Manual Test the application on server
 
 http://localhost:8080/maven-sample-webapp/sample?input=test
+http://localhost:8080/maven-sample-webapp/sample
 
 If required integration test cases can be enabled to test the sample application deployed on tomcat server
 
@@ -32,4 +33,9 @@ mvn clean verify sonar:sonar
 ```
 
 The coverage report is generated under target/site/jacoco, view the report by opening index.html
+
+![Coverage Report Local](code-coverage-local.png)
+
 The coverage report is also uploaded to sonarqube, the report can be viewed from sonarqube once ready.
+
+![Coverage Report Sonar](code-coverage-sonar.png)
