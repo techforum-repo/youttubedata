@@ -6,8 +6,9 @@ Generate Code Coverage for Remote JVM
 ```bash
 -javaagent:/usr/local/tomcat/lib/jacocoagent.jar=port=6300,address=0.0.0.0,destfile=/tmp/jacoco-remote.exec,includes=com.sample.*,append=true,output=tcpserver
 ```
+Modify the package name(com.sample.*) based on your project configuration, adding a * include all the classes for the coverage.
 
-##Tomcat Server
+## Tomcat Server
 
 The extended tomcat server on the docker container is already enabled with Jacoco plugin and sample application for quick remote coverage testing
 
@@ -18,7 +19,7 @@ clone https://github.com/techforum-repo/docker-projects/tree/master/tomcat-exten
 docker-compose up
 
 ```
-##Manual Test the application on server
+## Manual Test the application on server
 
 http://localhost:8080/maven-sample-webapp/sample?input=test
 
