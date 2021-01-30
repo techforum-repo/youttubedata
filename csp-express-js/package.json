@@ -1,0 +1,19 @@
+{
+  "name": "csp-express-js",
+  "version": "1.0.0",
+  "description": "CSP Express JS Demos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "content-security-policy": "^0.3.4",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "helmet": "^4.4.1",
+    "helmet-csp": "^3.3.1",
+    "path": "^0.12.7"
+  }
+}
