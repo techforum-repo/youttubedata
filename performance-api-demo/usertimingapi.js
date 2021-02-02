@@ -21,9 +21,9 @@ output+=`Start Time: ${r.startTime }<br/>`;
 output+=`Duration: ${r.duration }<br/>`;
 
 console.log(JSON.stringify(r.toJSON()));
+});
 
 performance.clearMarks();
 performance.clearMeasures();
-});
 
 document.getElementById('userdemo').innerHTML = output;
