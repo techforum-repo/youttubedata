@@ -6,6 +6,7 @@ The High Resolution Time standard defines a Performance interface that supports 
 
 ### High Resolution Time
 
+```
 interface Performance {
 DOMHighResTimeStamp now();
 readonly attribute DOMHighResTimeStamp timeOrigin;
@@ -14,7 +15,7 @@ object toJSON();
 
 window.performance.now(); 
 window.performance.timeorigin;
-
+```
 The DOMHighResTimeStamp type, as its name implies, represents a high resolution point in time. The DOMHighResTimeStamp type is a double and is used to store a time value in milliseconds
 
 ### Performance Timeline
@@ -23,13 +24,14 @@ The Performance Timeline API is an extension of the Performance API. The extensi
 
 The Performance Timeline API extends the Performance interface with three methods that provide different mechanisms to get a set of performance records (metrics), depending on the specified filter criteria.
 
+```
 partial interface Performance {
 	PerformanceEntryList getEntries();
 	PerformanceEntryList getEntriesByType(DOMString type);
 	PerformanceEntryList getEntriesByName(DOMString name,
 	  optional DOMString type);
 };
-
+```
 
 ### PerformanceEntry
 
@@ -37,6 +39,7 @@ The PerformanceEntry object encapsulates a single performance metric that is par
 
 PerformanceEntry instances will always be one of the following subtypes:
 
+```
 PerformanceMark
 PerformanceMeasure
 PerformanceFrameTiming
@@ -50,6 +53,7 @@ interface PerformanceEntry {
 	readonly attribute DOMHighResTimeStamp startTime;
 	readonly attribute DOMHighResTimeStamp duration;
 };
+```
 
 ### Navigation Timing API
 
@@ -61,6 +65,7 @@ The Navigation Timing API helps measure real user data (RUM) such as bandwidth, 
 
 Provides methods and properties to store and retrieve metrics regarding the browser's document navigation events. For example, this interface can be used to determine how much time it takes to load or unload a document.
 
+```
 performance.getEntriesByType("navigation")
 
 entryType: "navigation"
@@ -70,6 +75,7 @@ duration: total time until after onload
 type: "navigate", "reload", "back_forward", ...
 transferSize, encodedBodySize, decodedBodySize
 nextHopProtocol: "http/1.1", "h2", ...
+```
 
 ### Resource Timing API
 
@@ -77,6 +83,7 @@ The Resource Timing API provides a way to retrieve and analyze detailed network 
 
 The PerformanceResourceTiming interface enables retrieval and analysis of detailed network timing data regarding the loading of an application's resources.
 
+```
 performance.getEntriesByType("resource")
 
 PerformanceResourceTiming.startTime... 
@@ -86,13 +93,15 @@ PerformanceResourceTiming.initiatorType:
 "xmlhttprequest" for XMLHttpRequest
 "beacon" for sendBeacon 
 "" for fetch(), new Worker() etc.
-
+```
 
 ### Paint Timing API
 
 The PerformancePaintTiming interface of the Paint Timing API provides timing information about "paint" (also called "render") operations during web page construction.
 
+```
 performance.getEntriesByType("paint")
+```
 "first-paint" - when the browser first rendered after navigation
 "first-contentful-paint" - when the browser first rendered any text, image, non-white canvas or SVG
 
@@ -102,6 +111,7 @@ The User Timing interface allows the developer to create application specific ti
 
 mark events are named by the application and can be set at any location in an application. measure events are also named by the application but they are placed between two marks thus they are effectively a midpoint between two marks.
 
+```
 partial interface Performance {
 	void mark(DOMString markName);
 	void clearMarks(optional DOMString markName);
@@ -112,6 +122,7 @@ partial interface Performance {
 };
 
 performance.getEntriesByName(YourMark); 
+```
 
 ## Prerequisites
 
