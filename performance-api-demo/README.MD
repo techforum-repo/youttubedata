@@ -123,6 +123,9 @@ partial interface Performance {
 
 performance.getEntriesByName(YourMark); 
 ```
+Dev Tool - Performance tab displayes the User Timing(performance measures's) in the timeline
+
+![User API - Dev Tool Timeline](user-timing-dev-tools.png)
 
 ## Prerequisites
 
