@@ -6,7 +6,7 @@ Support for multiple tenenats/themes
 
 ## Configurations - Multi Site
 
-Create multiple sites under ui.frontend\src\main\webpack with the default content inside webpack folder on the default ui.frontend module
+Create multiple sites under ui.frontend\src\main\webpack with the default content inside webpack folder.
 
 ### webpack-common.js
 
@@ -14,7 +14,7 @@ Entry for all the sites
 
 ```
 entry: {
-        site1: SOURCE_ROOT + SITE_1 +'/site/main.ts',
+		site1: SOURCE_ROOT + SITE_1 +'/site/main.ts',
 		site2: SOURCE_ROOT + SITE_2 +'/site/main.ts'
     },
     output: {
@@ -25,13 +25,13 @@ entry: {
     }
 	
 	plugins: [
-        new CleanWebpackPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'clientlib-[name]/[name].css'
+			new CleanWebpackPlugin(),
+			new webpack.NoEmitOnErrorsPlugin(),
+			new MiniCssExtractPlugin({
+			filename: 'clientlib-[name]/[name].css'
         }),
         new CopyWebpackPlugin([
-            { from: path.resolve(__dirname, SOURCE_ROOT + SITE_1 +'/resources/'), to: './clientlib-site1'},
+			{ from: path.resolve(__dirname, SOURCE_ROOT + SITE_1 +'/resources/'), to: './clientlib-site1'},
 			{from: path.resolve(__dirname, SOURCE_ROOT + SITE_2 +'/resources/'), to: './clientlib-site2'}
         ])
     ]
@@ -133,7 +133,7 @@ http://localhost:8080/site2.html
 The site specific style/script changes will reflect immediately to the browser.
 
 
-###Watch & aemfed
+### Watch & aemfed
 
 Navigate to `ui.frontend` in your project and run `npm run watch`
 Navigate to `ui.frontend` in your project in another terminal and run `npm run aem-sync`
