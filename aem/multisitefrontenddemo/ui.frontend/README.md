@@ -14,8 +14,8 @@ Entry for all the sites
 
 ```
 entry: {
-		site1: SOURCE_ROOT + SITE_1 +'/site/main.ts',
-		site2: SOURCE_ROOT + SITE_2 +'/site/main.ts'
+	site1: SOURCE_ROOT + SITE_1 +'/site/main.ts',
+	site2: SOURCE_ROOT + SITE_2 +'/site/main.ts'
     },
     output: {
         filename: (chunkData) => {
@@ -25,10 +25,10 @@ entry: {
     }
 	
 	plugins: [
-			new CleanWebpackPlugin(),
-			new webpack.NoEmitOnErrorsPlugin(),
-			new MiniCssExtractPlugin({
-			filename: 'clientlib-[name]/[name].css'
+		new CleanWebpackPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
+		new MiniCssExtractPlugin({
+		filename: 'clientlib-[name]/[name].css'
         }),
         new CopyWebpackPlugin([
 			{ from: path.resolve(__dirname, SOURCE_ROOT + SITE_1 +'/resources/'), to: './clientlib-site1'},
