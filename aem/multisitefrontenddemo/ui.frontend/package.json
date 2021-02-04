@@ -14,7 +14,7 @@
     "prod": "webpack -p --config ./webpack.prod.js && clientlib --verbose",
     "start": "webpack-dev-server --open --config ./webpack.dev.js",
     "aem-sync": "aemfed -t http://admin:admin@localhost:4502 -w ../ui.apps/src/main/content/jcr_root/",
-    "watch": "webpack-dev-server --config ./webpack.dev.js --env.writeToDisk"
+    "watch": "watch \"npm run dev\" src"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
