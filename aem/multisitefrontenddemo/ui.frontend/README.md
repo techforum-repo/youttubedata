@@ -144,14 +144,30 @@ The AEM server URL is proxied through http://localhost:3000/ e.g http://localhos
 
 ### Dev Proxy
 
+webpack.proxy.js - Enable the proxy bypass configuraion for all the clientlibraries. 
+
+```
+bypass: function(req, res, proxyOptions) {
+
+	console.log(req.url);
+
+	if (req.url.match(/\/clientlib\-site1[a-z\.]+\.css/)) return "/clientlib-site1/site1.css";
+	else if (req.url.match(/\/clientlib\-site1[a-z\.]+\.js/)) return "/clientlib-site1/site1.js";
+	else if (req.url.match(/\/clientlib\-site2[a-z\.]+\.css/)) return "/clientlib-site2/site2.css";
+	else if (req.url.match(/\/clientlib\-site2[a-z\.]+\.js/)) return "/clientlib-site2/site2.js"
+}
+```
+
 Navigate to `ui.frontend` in your project and run `npm run dev-proxy`
 
 The requests are proxied to AEM server through webpack server.
-The local CSS and JS files are injected based on the file name, the browser tabs reloaded on changes.
+The local CSS and JS files are injected based on the file names, the browser tabs reloaded on changes.
 
 http://localhost:8080/content/multisitefrontenddemo/us/en.html
 
-To do the final deplument to AEM, navigate to project root folder and execute
+## Final Deployment to AEM
+
+To do the final deployment to AEM, navigate to project root folder and execute
 
 ```
 mvn clean install -PautoInstallSinglePackage
