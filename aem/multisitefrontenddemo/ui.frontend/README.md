@@ -141,3 +141,18 @@ Navigate to `ui.frontend` in your project in another terminal and run `npm run a
 Now the style/script changes are synced immediately to the AEM server.
 
 The AEM server URL is proxied through http://localhost:3000/ e.g http://localhost:3000/editor.html/content/multisitefrontenddemo/us/en.html(the changes reflect immediately to the browser)
+
+### Dev Proxy
+
+Navigate to `ui.frontend` in your project and run `npm run dev-proxy`
+
+The requests are proxied to AEM server through webpack server.
+The local CSS and JS files are injected based on the file name, the browser tabs reloaded on changes.
+
+http://localhost:8080/content/multisitefrontenddemo/us/en.html
+
+To do the final deplument to AEM, navigate to project root folder and execute
+
+```
+mvn clean install -PautoInstallSinglePackage
+```
