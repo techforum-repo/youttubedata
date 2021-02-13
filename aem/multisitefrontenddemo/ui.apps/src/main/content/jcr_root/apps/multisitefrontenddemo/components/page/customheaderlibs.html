@@ -18,3 +18,10 @@
 </sly>
 
 <sly data-sly-resource="${'contexthub' @ resourceType='granite/contexthub/components/contexthub'}"/>
+
+<sly data-sly-use.style="com.multisitefrontenddemo.core.models.StyleNameModel"/>
+
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.css @ categories=[style.styleNameSite, style.styleNameDependency] }">
+</sly>

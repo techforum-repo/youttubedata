@@ -26,6 +26,7 @@ local.properties
 # CDT-specific
 .cproject
 
+
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
@@ -71,6 +72,9 @@ buildNumber.properties
 
 ### Vault ###
 .vlt
+*.mine
+*.base
+*.theirs
 
 
 ### IntelliJ ###

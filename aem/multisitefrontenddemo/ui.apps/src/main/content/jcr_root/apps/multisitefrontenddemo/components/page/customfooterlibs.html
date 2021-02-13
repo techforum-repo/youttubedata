@@ -17,3 +17,14 @@
     <sly data-sly-call="${clientlib.js @ categories='multisitefrontenddemo.base'}"/>
 </sly>
 
+
+
+<sly data-sly-use.style="com.multisitefrontenddemo.core.models.StyleNameModel"/>
+
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.js @ categories=[style.styleNameSite, style.styleNameDependency] }">
+</sly>
+
+
+

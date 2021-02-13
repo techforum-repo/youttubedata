@@ -13,7 +13,7 @@
     "dev": "webpack -d --env dev --config ./webpack.dev.js && clientlib --verbose",
     "prod": "webpack -p --config ./webpack.prod.js && clientlib --verbose",
     "start": "webpack-dev-server --open --config ./webpack.dev.js",
-	 "dev-proxy": "webpack-dev-server --open --config ./webpack.proxy.js",
+    "dev-proxy": "webpack-dev-server --open --config ./webpack.proxy.js",
     "aem-sync": "aemfed -t http://admin:admin@localhost:4502 -w ../ui.apps/src/main/content/jcr_root/",
     "watch": "watch \"npm run dev\" src"
   },
