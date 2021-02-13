@@ -2,6 +2,8 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:lastModified="{Date}2021-02-13T12:40:14.506-06:00"
+        cq:lastModifiedBy="admin"
         cq:tags="[]"
         cq:template="/conf/multisitefrontenddemo/settings/wcm/templates/xf-web-variation"
         cq:xfMasterVariation="{Boolean}true"
@@ -29,6 +31,15 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="multisitefrontenddemo/components/search"
                 searchRoot="/content/multisitefrontenddemo/us"/>
+            <text
+                jcr:created="{Date}2021-02-13T12:39:49.425-06:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2021-02-13T12:40:14.430-06:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="multisitefrontenddemo/components/text"
+                text="&lt;p>FR - Header&lt;/p>&#xd;&#xa;"
+                textIsRich="true"/>
         </root>
     </jcr:content>
 </jcr:root>
