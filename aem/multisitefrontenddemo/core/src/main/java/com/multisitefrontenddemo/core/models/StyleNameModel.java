@@ -4,12 +4,13 @@ import javax.inject.Inject;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Optional;
 
 
 @Model(adaptables = { SlingHttpServletRequest.class })
 public class StyleNameModel {
 
-	@Inject
+	@Inject @Optional
 	private String styleName;
 
 
