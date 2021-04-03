@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/customembed" mode="merge"/>
+    <filter root="/content/customembed" mode="merge"/>
+    <filter root="/content/dam/customembed" mode="merge"/>
+    <filter root="/content/experience-fragments/customembed" mode="merge"/>
+</workspaceFilter>

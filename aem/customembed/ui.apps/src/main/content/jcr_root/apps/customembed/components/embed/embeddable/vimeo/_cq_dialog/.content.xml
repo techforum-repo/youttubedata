@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Vimeo"
+    sling:resourceType="granite/ui/components/coral/foundation/container">
+    <items jcr:primaryType="nt:unstructured">
+        <videoId
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+            fieldDescription="ID of the YouTube video to embed."
+            fieldLabel="Video ID"
+            name="./vimeoVideoId"
+            required="{Boolean}true"/>
+        <width
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+            fieldDescription="Width of the YouTube video player."
+            fieldLabel="Width"
+            name="./vimeoWidth"/>
+        <height
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+            fieldDescription="Height of the YouTube video player."
+            fieldLabel="Height"
+            name="./vimeoHeight"/>
+        <parameters
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container"
+            fieldDescription="Parameters of the YouTube video player."
+            fieldLabel="Parameters">
+            <items jcr:primaryType="nt:unstructured">
+                <mute
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                    checked="${cqDesign.vimeoMuteDefaultValue == 'true'}"
+                    fieldDescription="This parameter specifies whether the video will play muted by default. Enabling this increases the chance that Autoplay works in modern browsers."
+                    name="./vimeoMute"
+                    text="Enable Mute"
+                    uncheckedValue="false"
+                    value="true">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                        expression="${cqDesign.vimeoMuteEnabled == 'true'}"/>
+                </mute>
+                <autoplay
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                    checked="${cqDesign.vimeoAutoPlayDefaultValue == 'true'}"
+                    fieldDescription="This parameter specifies whether the initial video will automatically start to play when the player loads. This is only effective on Publish or when using &quot;View as Published&quot;."
+                    name="./vimeoAutoPlay"
+                    text="Enable Autoplay"
+                    uncheckedValue="false"
+                    value="true">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                        expression="${cqDesign.vimeoAutoPlayEnabled == 'true'}"/>
+                </autoplay>
+                <loop
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                    checked="${cqDesign.vimeoLoopDefaultValue == 'true'}"
+                    fieldDescription="In the case of a single video specifies whether the player should play the initial video again and again. In the case of a playlist, the player plays the entire playlist and then starts again at the first video."
+                    name="./vimeoLoop"
+                    text="Enable Loop"
+                    uncheckedValue="false"
+                    value="true">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                        expression="${cqDesign.vimeoLoopEnabled == 'true'}"/>
+                </loop>
+                <inline
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                    checked="${cqDesign.youtubePlaysInlineDefaultValue == 'true'}"
+                    fieldDescription="This parameter controls whether videos play inline (on) or fullscreen (off) in an HTML5 player on iOS."
+                    name="./vimeoPlaysInline"
+                    text="Enable Inline Playback (iOS)"
+                    uncheckedValue="false"
+                    value="true">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/renderconditions/simple"
+                        expression="${cqDesign.vimeoPlaysInlineEnabled == 'true'}"/>
+                </inline>
+            </items>
+        </parameters>
+    </items>
+    <granite:data
+        jcr:primaryType="nt:unstructured"
+        cmp-embed-dialog-edit-embeddableoptions="true"
+        cmp-embed-dialog-edit-showhidetargetvalue="customembed/components/embed/embeddable/vimeo"/>
+</jcr:root>
