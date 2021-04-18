@@ -1,7 +1,7 @@
-# Browser Storage Demo
+# User Agent Client Hints Demo
 
 
-Demo on different storage types for browsers, the demo project is built on Express.JS
+Demo on User Agent Client Hints Headers
 
 ## Prerequisites
 
@@ -23,18 +23,15 @@ node app.js
 
 ## Demo URL's
 
-Explain how to run the automated tests for this system
+Enable myexample.com and sub.myexample.com in your local machine, also trust the self signed root certificate
 
 ```
+Refer https://betterprogramming.pub/trusted-self-signed-certificate-and-local-domains-for-testing-7c6e6e3f9548 for more details
+```
 
-Cookies Demo - https://localhost/cookies.html
-
-Web Storage API Demo - https://localhost/webstorageapi.html
-
-IndexDB API Demo - https://localhost/indexdb.html
-
-Web SQL API Demo - https://localhost/websqlapi.html
-
-Cache Storage API - https://localhost/cachestorageapi.html
+```
+http://myexample.com/index.html
+https://myexample.com/index.html
+https://myexample.com/index1.html
 
 ```
