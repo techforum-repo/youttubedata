@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>User Agent Client Hints - Demo</title>
+				
+	</head>
+	<body>
+		<b>User Agent Client Hints - Demo Child.html</b> <br/> <br/>
+		
+		<b>Brands:</b> <br/>
+		
+		<p id="brands"></p>
+		
+		<b>Mobile:</b> <p id="mobile"></p> <br/>
+		
+		<b>HighEntropyValues:</b> <br/>
+		
+		<p id="data"></p>
+		
+		<script>		
+			const uaData = navigator.userAgentData;
+			const brands = uaData.brands; 
+			const mobileness = uaData.mobile;
+			
+			var brandData='';
+			
+			brands.forEach(function (item) {
+				brandData+='Brand: '+item.brand+' ' + 'Version: '+item.version+ '<br/>';
+			});			
+		
+			document.getElementById("brands").innerHTML=brandData;			
+			document.getElementById("mobile").innerHTML=mobileness;
+			
+			uaData.getHighEntropyValues(["architecture","model","platform","platformVersion","uaFullVersion"]).then(function() {
+				var dataElement = document.getElementById("data");
+				for (var key in arguments[0]) { 
+				  var li = document.createElement('li');
+				  li.innerHTML = "<code>"+key+"</code>: "+arguments[0][key];
+				  data.appendChild(li);
+				}
+			});
+		
+		</script>	
+			
+	</body>
+</html>
