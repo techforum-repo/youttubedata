@@ -1,0 +1,19 @@
+// Configuration created by Apache Sling JCR Installer
+{
+  "alloworigin":[
+    "http://localhost:3000"
+  ],
+  "allowedpaths":[
+    "/content/_cq_graphql/global/endpoint.json",
+    "/graphql/execute.json/.*"
+  ],
+  "supportedheaders":[
+    "Origin",
+    "Accept",
+    "X-Requested-With",
+    "Content-Type",
+    "Access-Control-Request-Method",
+    "Access-Control-Request-Headers",
+    "Authorization"
+  ]
+}

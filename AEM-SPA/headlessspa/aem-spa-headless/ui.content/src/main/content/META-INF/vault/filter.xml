@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/global" mode="merge"/>
+    <filter root="/content/dam/sampledata" mode="merge"/>
+	<filter root="/content/cq:graphql" mode="merge"/>	
+</workspaceFilter>
