@@ -11,6 +11,10 @@ REACT_APP_AEM_PASS=admin
 
 Recommended to use AEM publish instance for consuming the headless content from external App
 
+### `npm install`
+
+Run the npm install command at the root folder
+
 ### `npm start`
 
 Runs the app in the development mode.\
