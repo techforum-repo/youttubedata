@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/spassr" mode="merge"/>
+    <filter root="/content/spassr" mode="merge"/>
+    <filter root="/content/dam/spassr/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/spassr" mode="merge"/>
+</workspaceFilter>

@@ -1,0 +1,10 @@
+{
+    "scripts": [
+        "create path (sling:OrderedFolder) /content/dam/spassr",
+        "create path (nt:unstructured) /content/dam/spassr/jcr:content",
+        "set properties on /content/dam/spassr/jcr:content",
+        "set cq:conf{String} to /conf/spassr",
+        "set jcr:title{String} to \"AEM SPA SSR\"",
+        "end"
+    ]
+}
