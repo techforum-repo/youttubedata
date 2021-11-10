@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/spaeditableareas" mode="merge"/>
+    <filter root="/content/spaeditableareas" mode="merge"/>
+    <filter root="/content/dam/spaeditableareas/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/spaeditableareas" mode="merge"/>
+</workspaceFilter>
