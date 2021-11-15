@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="albinsblog.onmicrosoft.com"
+  PolicyId="B2C_1A_signup_signin_saml"
+  PublicPolicyUri="http://albinsblog.onmicrosoft.com/B2C_1A_signup_signin_saml">
+
+  <BasePolicy>
+    <TenantId>albinsblog.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <UserJourneys>
+    <UserJourney Id="SignUpOrSignIn">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="4" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer"/>
+      </OrchestrationSteps>
+    </UserJourney>
+  </UserJourneys>
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="SAML2"/>
+	  <Metadata>				
+		<Item Key="XmlSignatureAlgorithm">Sha256</Item>
+		
+	  </Metadata>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="displayName"/>
+        <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="givenName"/>
+        <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="familyName"/>
+        <OutputClaim ClaimTypeReferenceId="SignInName" PartnerClaimType="email"/>
+        <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId"/>
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="objectId" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" ExcludeAsClaim="true"/>
+
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

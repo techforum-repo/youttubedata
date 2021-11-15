@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="albinsblog.onmicrosoft.com" 
+  PolicyId="B2C_1A_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://albinsblog.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
+  
+  <BasePolicy>
+    <TenantId>albinsblog.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+  </BasePolicy>
+  <BuildingBlocks>
+
+  </BuildingBlocks>
+
+  <ClaimsProviders>
+
+
+    <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+         <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">2d45d206-e5c3-4acf-bc80-10def8077d23</Item>
+            <Item Key="IdTokenAudience">c0d1f334-267e-49e8-9cda-6d49ac08ddbf</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="2d45d206-e5c3-4acf-bc80-10def8077d23" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="c0d1f334-267e-49e8-9cda-6d49ac08ddbf" />
+          </InputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+	
+	<ClaimsProvider>
+		<DisplayName>Token Issuer</DisplayName>
+		<TechnicalProfiles>
+
+			<!-- SAML Token Issuer technical profile -->
+			<TechnicalProfile Id="Saml2AssertionIssuer">
+			  <DisplayName>Token Issuer</DisplayName>
+			  <Protocol Name="SAML2"/>
+			  <OutputTokenFormat>SAML2</OutputTokenFormat>
+			  <Metadata>
+				<Item Key="IssuerUri">https://albinsblog.onmicrosoft.com</Item>
+				<Item Key="XmlSignatureAlgorithm">Sha256</Item>
+			</Metadata>
+			  <CryptographicKeys>
+				<Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlIdpCert"/>				
+			  </CryptographicKeys>
+			  <InputClaims/>
+			  <OutputClaims/>
+			  <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml-issuer"/>
+			</TechnicalProfile>
+
+			<!-- Session management technical profile for SAML-based tokens -->
+			<TechnicalProfile Id="SM-Saml-issuer">
+			  <DisplayName>Session Management Provider</DisplayName>
+			  <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+			</TechnicalProfile>
+
+		</TechnicalProfiles>
+	</ClaimsProvider>
+
+  </ClaimsProviders>
+
+    <!--UserJourneys>
+	
+	</UserJourneys-->
+
+</TrustFrameworkPolicy>
