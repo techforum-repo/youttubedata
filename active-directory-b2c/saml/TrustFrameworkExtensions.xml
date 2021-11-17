@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <TrustFrameworkPolicy 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -13,16 +13,26 @@
     <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
   </BasePolicy>
   <BuildingBlocks>
+   <ClaimsSchema>
+    <ClaimType Id="isForgotPassword">
+      <DisplayName>isForgotPassword</DisplayName>
+      <DataType>boolean</DataType>
+      <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
+    </ClaimType>
+   </ClaimsSchema>
 
+	<ContentDefinitions> 
+		<ContentDefinition Id="api.signuporsignin">
+		  <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.2</DataUri>
+		</ContentDefinition>
+   </ContentDefinitions>   
+  
   </BuildingBlocks>
-
   <ClaimsProviders>
-
-
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
       <TechnicalProfiles>
-         <TechnicalProfile Id="login-NonInteractive">
+        <TechnicalProfile Id="login-NonInteractive">
           <Metadata>
             <Item Key="client_id">ProxyIdentityExperienceFrameworkAppId</Item>
             <Item Key="IdTokenAudience">IdentityExperienceFrameworkAppId</Item>
@@ -34,41 +44,121 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
-	
+    <ClaimsProvider>
+      <DisplayName>Token Issuer</DisplayName>
+      <TechnicalProfiles>
+        <!-- SAML Token Issuer technical profile -->
+        <TechnicalProfile Id="Saml2AssertionIssuer">
+          <DisplayName>Token Issuer</DisplayName>
+          <Protocol Name="SAML2" />
+          <OutputTokenFormat>SAML2</OutputTokenFormat>
+          <Metadata>
+            <Item Key="IssuerUri">https://albinsblog.onmicrosoft.com</Item>
+            <Item Key="XmlSignatureAlgorithm">Sha256</Item>
+          </Metadata>
+          <CryptographicKeys>
+		    <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_SamlIdpCert"/>
+            <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlIdpCert" />
+          </CryptographicKeys>
+          <InputClaims />
+          <OutputClaims />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml-issuer" />
+        </TechnicalProfile>
+        <!-- Session management technical profile for SAML-based tokens -->
+        <TechnicalProfile Id="SM-Saml-issuer">
+          <DisplayName>Session Management Provider</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
 	<ClaimsProvider>
-		<DisplayName>Token Issuer</DisplayName>
+		<DisplayName>Local Account</DisplayName>
 		<TechnicalProfiles>
-
-			<!-- SAML Token Issuer technical profile -->
-			<TechnicalProfile Id="Saml2AssertionIssuer">
-			  <DisplayName>Token Issuer</DisplayName>
-			  <Protocol Name="SAML2"/>
-			  <OutputTokenFormat>SAML2</OutputTokenFormat>
-			  <Metadata>
-				<Item Key="IssuerUri">https://albinsblog.onmicrosoft.com</Item>
-				<Item Key="XmlSignatureAlgorithm">Sha256</Item>
+		  <TechnicalProfile Id="ForgotPassword">
+			<DisplayName>Forgot your password?</DisplayName>
+			<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+			<OutputClaims>
+			  <OutputClaim ClaimTypeReferenceId="isForgotPassword" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+			</OutputClaims>
+			<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+		  </TechnicalProfile>
+		  <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
+			<Metadata>
+			  <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>
 			</Metadata>
-			  <CryptographicKeys>
-				<Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlIdpCert"/>				
-			  </CryptographicKeys>
-			  <InputClaims/>
-			  <OutputClaims/>
-			  <UseTechnicalProfileForSessionManagement ReferenceId="SM-Saml-issuer"/>
-			</TechnicalProfile>
-
-			<!-- Session management technical profile for SAML-based tokens -->
-			<TechnicalProfile Id="SM-Saml-issuer">
-			  <DisplayName>Session Management Provider</DisplayName>
-			  <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.SamlSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
-			</TechnicalProfile>
-
+		  </TechnicalProfile>
 		</TechnicalProfiles>
-	</ClaimsProvider>
-
+    </ClaimsProvider> 
+  
   </ClaimsProviders>
+  
+    <UserJourneys>
+	  <UserJourney Id="CustomSignUpSignIn">
+		  <OrchestrationSteps>
+			<OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+			  <ClaimsProviderSelections>
+				<ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+				<ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
+			  </ClaimsProviderSelections>
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			<OrchestrationStep Order="2" Type="ClaimsExchange">
+			  <Preconditions>
+				<Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+				  <Value>objectId</Value>
+				  <Action>SkipThisOrchestrationStep</Action>
+				</Precondition>
+			  </Preconditions>
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+				<ClaimsExchange Id="ForgotPasswordExchange" TechnicalProfileReferenceId="ForgotPassword" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			
+			<OrchestrationStep Order="3" Type="InvokeSubJourney">
+			  <Preconditions>
+				<Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+				  <Value>isForgotPassword</Value>
+				  <Action>SkipThisOrchestrationStep</Action>
+				</Precondition>
+			  </Preconditions>
+			  <JourneyList>
+				<Candidate SubJourneyReferenceId="PasswordReset" />
+			  </JourneyList>
+			</OrchestrationStep>
 
-    <!--UserJourneys>
+			<!-- This step reads any user attributes that we may not have received when in the token. -->
+			<OrchestrationStep Order="4" Type="ClaimsExchange">
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			<OrchestrationStep Order="5" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer" />
+		  </OrchestrationSteps>
+		  <ClientDefinition ReferenceId="DefaultWeb" />
+		</UserJourney>		
+	</UserJourneys>
 	
-	</UserJourneys-->
+	<SubJourneys>
+	  <SubJourney Id="PasswordReset" Type="Call">
+		<OrchestrationSteps>
+		  <!-- Validate user's email address. -->
+		  <OrchestrationStep Order="1" Type="ClaimsExchange">
+			<ClaimsExchanges>
+			  <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
+			</ClaimsExchanges>
+		  </OrchestrationStep>
+
+		  <!-- Collect and persist a new password. -->
+		  <OrchestrationStep Order="2" Type="ClaimsExchange">
+			<ClaimsExchanges>
+			  <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+			</ClaimsExchanges>
+		  </OrchestrationStep>
+		</OrchestrationSteps>
+	 </SubJourney>
+</SubJourneys>
 
 </TrustFrameworkPolicy>
