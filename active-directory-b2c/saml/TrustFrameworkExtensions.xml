@@ -19,14 +19,7 @@
       <DataType>boolean</DataType>
       <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
     </ClaimType>
-   </ClaimsSchema>
-
-	<ContentDefinitions> 
-		<ContentDefinition Id="api.signuporsignin">
-		  <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.2</DataUri>
-		</ContentDefinition>
-   </ContentDefinitions>   
-  
+   </ClaimsSchema> 
   </BuildingBlocks>
   <ClaimsProviders>
     <ClaimsProvider>
