@@ -13,14 +13,6 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
   </BasePolicy>
 
-  <UserJourneys>
-    <UserJourney Id="SignUpOrSignIn">
-      <OrchestrationSteps>
-        <OrchestrationStep Order="4" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer"/>
-      </OrchestrationSteps>
-    </UserJourney>
-  </UserJourneys>
-
   <RelyingParty>
     <DefaultUserJourney ReferenceId="CustomSignUpSignIn" />
     <TechnicalProfile Id="PolicyProfile">
