@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <TrustFrameworkPolicy 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -14,13 +13,22 @@
   </BasePolicy>
   <BuildingBlocks>
    <ClaimsSchema>
+   <!-- Handle forgot password-->
     <ClaimType Id="isForgotPassword">
       <DisplayName>isForgotPassword</DisplayName>
       <DataType>boolean</DataType>
       <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
-    </ClaimType>
-   </ClaimsSchema> 
+    </ClaimType>	
+	<!-- To Enable addition fields -->
+	<ClaimType Id="city">
+		<DisplayName>City</DisplayName>
+		<DataType>string</DataType>		
+		<UserHelpText>Your City.</UserHelpText>
+		<UserInputType>TextBox</UserInputType>
+	 </ClaimType>	 
+   </ClaimsSchema>  
   </BuildingBlocks>
+  
   <ClaimsProviders>
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
@@ -64,6 +72,8 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+	
+	<!-- Enable forgot password-->
 	<ClaimsProvider>
 		<DisplayName>Local Account</DisplayName>
 		<TechnicalProfiles>
@@ -77,12 +87,61 @@
 		  </TechnicalProfile>
 		  <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
 			<Metadata>
-			  <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>
+			   <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>	
+			   <!-- Hide Forgot Password Link if required -->
+			   <!--<Item Key="setting.forgotPasswordLinkLocation">none</Item>-->		  
+			  <!-- Hide Signup Link if required -->
+			  <!--<Item Key="setting.showSignupLink">false</Item> -->			  
+			  <!-- Enable Remember Me checkbox -->
+			  <!--<Item Key="setting.enableRememberMe">true</Item>	-->
 			</Metadata>
 		  </TechnicalProfile>
 		</TechnicalProfiles>
-    </ClaimsProvider> 
-  
+    </ClaimsProvider>
+	
+	<!-- Customize Signup Page - enabled City field-->
+	
+	 <ClaimsProvider>
+      <DisplayName>Local Account</DisplayName>
+      <TechnicalProfiles>
+			<TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+			  <DisplayName>Email signup</DisplayName>
+			  <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+			  <Metadata>
+			    <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+				<Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+				<!-- Disable Email Verifying on Sign Up -->
+				<!--<Item Key="EnforceEmailVerification">false</Item>-->
+			  </Metadata>
+			  <CryptographicKeys>
+				<Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+			  </CryptographicKeys>
+			  <InputClaims>
+				<InputClaim ClaimTypeReferenceId="email" />
+			  </InputClaims>
+			  <OutputClaims>
+				<OutputClaim ClaimTypeReferenceId="objectId" />
+				<OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />
+				<OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+				<OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+				<OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+				<OutputClaim ClaimTypeReferenceId="authenticationSource" />
+				<OutputClaim ClaimTypeReferenceId="newUser" />
+			   
+			    <!-- Optional claims, to be collected from the user -->
+				<OutputClaim ClaimTypeReferenceId="displayName" />
+				<OutputClaim ClaimTypeReferenceId="givenName" />
+				<OutputClaim ClaimTypeReferenceId="surName" />
+				<!-- Additional City field enabled-->
+				<OutputClaim ClaimTypeReferenceId="city" />
+			  </OutputClaims>
+			  <ValidationTechnicalProfiles>
+				<ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+			  </ValidationTechnicalProfiles>
+			  <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+			 </TechnicalProfile>			 
+		</TechnicalProfiles>
+       </ClaimsProvider>
   </ClaimsProviders>
   
     <UserJourneys>
@@ -131,13 +190,40 @@
 			<OrchestrationStep Order="5" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer" />
 		  </OrchestrationSteps>
 		  <ClientDefinition ReferenceId="DefaultWeb" />
+		</UserJourney>	
+
+	    <UserJourney Id="ProfileEdit">
+		  <OrchestrationSteps>
+			<OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+			  <ClaimsProviderSelections>
+				<ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+			  </ClaimsProviderSelections>
+			</OrchestrationStep>
+			<OrchestrationStep Order="2" Type="ClaimsExchange">
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			<OrchestrationStep Order="3" Type="ClaimsExchange">
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			<OrchestrationStep Order="4" Type="ClaimsExchange">
+			  <ClaimsExchanges>
+				<ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
+			  </ClaimsExchanges>
+			</OrchestrationStep>
+			<OrchestrationStep Order="5" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="Saml2AssertionIssuer" />
+		  </OrchestrationSteps>
+		  <ClientDefinition ReferenceId="DefaultWeb" />
 		</UserJourney>		
 	</UserJourneys>
 	
 	<SubJourneys>
 	  <SubJourney Id="PasswordReset" Type="Call">
 		<OrchestrationSteps>
-		  <!-- Validate user's email address. -->
+		  <!-- Validate user's email address. Remove this OrchestrationStep to disable Email Verification on Password Reset-->
 		  <OrchestrationStep Order="1" Type="ClaimsExchange">
 			<ClaimsExchanges>
 			  <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
