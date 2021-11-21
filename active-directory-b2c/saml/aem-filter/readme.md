@@ -1,8 +1,8 @@
 # Filter to handle B2C Profile Edit with SAML Issuer
 
-The Filter send POST request to B2C profile edit policy based on the paramter operation=profileedit in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful redirect send to profile edit screen.
+The Filter sends POST request to B2C profile edit policy URL - https://tenantname.b2clogin.com/tenantname.onmicrosoft.com/B2C_1A_ProfileEdit/samlp/sso/login based on the paramter operation=profileedit in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful login send the user to profile edit screen.
 
-####Dependencies in core module pom.xml
+###Dependencies in core module pom.xml
 
 ```
  <!-- https://mvnrepository.com/artifact/xalan/xalan -->
@@ -27,7 +27,7 @@ The Filter send POST request to B2C profile edit policy based on the paramter op
 		</dependency>
 		
 ```
-####Embed the following dependencies to the core bundle
+###Embed the following dependencies to the core bundle
 
 Embed dependencies through bnd plugin
 
