@@ -2,7 +2,7 @@
 
 The Filter sends POST request to B2C profile edit policy URL - **https://tenantname.b2clogin.com/tenantname.onmicrosoft.com/B2C_1A_ProfileEdit/samlp/sso/login** with the SAML request parameter(the SAMLRequest is same as login request but some changes specific to Profile Edit) based on the paramter **operation=profileedit** e.g **https://localhost/content/spassr/us/en.html?operation=profileedit** in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful login send the user to profile edit screen. Replace tenantname references with your B2C tenantname.
 
-SAML Request
+SAML Request - Issuer is the Entity ID configured in B2C and AEM SAML Authentication Handler
 
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
