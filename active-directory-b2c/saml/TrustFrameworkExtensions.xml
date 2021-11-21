@@ -94,7 +94,7 @@
 			  <!-- Hide Signup Link if required -->
 			  <!--<Item Key="setting.showSignupLink">false</Item> -->			  
 			  <!-- Enable Remember Me checkbox -->
-			  <!--<Item Key="setting.enableRememberMe">true</Item>	-->
+			  <!--<Item Key="setting.enableRememberMe">true</Item>	-->			 
 			</Metadata>
 		  </TechnicalProfile>
 		</TechnicalProfiles>
@@ -113,6 +113,7 @@
 				<Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
 				<!-- Disable Email Verifying on Sign Up -->
 				<!--<Item Key="EnforceEmailVerification">false</Item>-->
+				<!--<Item Key="setting.showCancelButton">false</Item>	-->			
 			  </Metadata>
 			  <CryptographicKeys>
 				<Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
@@ -153,6 +154,7 @@
 			  <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
 			  <Metadata>
 				<Item Key="ContentDefinitionReferenceId">api.selfasserted.profileupdate</Item>
+				<!--<Item Key="setting.showCancelButton">false</Item>-->
 			  </Metadata>
 			  <IncludeInSso>false</IncludeInSso>
 			  <InputClaims>
