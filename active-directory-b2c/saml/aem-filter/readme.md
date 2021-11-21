@@ -1,6 +1,6 @@
 # Filter to handle B2C Profile Edit with SAML Issuer
 
-The Filter sends POST request to B2C profile edit policy URL - https://tenantname.b2clogin.com/tenantname.onmicrosoft.com/B2C_1A_ProfileEdit/samlp/sso/login based on the paramter operation=profileedit in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful login send the user to profile edit screen.
+The Filter sends POST request to B2C profile edit policy URL - https://tenantname.b2clogin.com/tenantname.onmicrosoft.com/B2C_1A_ProfileEdit/samlp/sso/login with the SAML request parameter(the SAMLRequest is same as login request but some changes specific to Profile Edit) based on the paramter operation=profileedit in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful login send the user to profile edit screen.
 
 #### Dependencies in core module pom.xml
 
