@@ -2,7 +2,7 @@
 
 The Filter sends POST request to B2C profile edit policy URL - https://tenantname.b2clogin.com/tenantname.onmicrosoft.com/B2C_1A_ProfileEdit/samlp/sso/login based on the paramter operation=profileedit in the URL, B2C redirect the user to profile edit page if already logged in, if not send the user to the login screen, upon successful login send the user to profile edit screen.
 
-###Dependencies in core module pom.xml
+#### Dependencies in core module pom.xml
 
 ```
  <!-- https://mvnrepository.com/artifact/xalan/xalan -->
@@ -27,7 +27,7 @@ The Filter sends POST request to B2C profile edit policy URL - https://tenantnam
 		</dependency>
 		
 ```
-###Embed the following dependencies to the core bundle
+#### Embed the following dependencies to the core bundle
 
 Embed dependencies through bnd plugin
 
@@ -43,8 +43,8 @@ Embed dependencies through bnd plugin
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-__Import-Package: javax.annotation;version=0.0.0,!org.apache.xml.resolver*;resolution:=optional;version=0.0.0,!org.apache.xml.serializer;resolution:=optional;version=0.0.0,!sun.io;resolution:=optional;version=0.0.0,*__
-__-includeresource: xalan-2.7.2.jar;xercesImpl-2.12.0.jar;xmlsec-2.0.7.jar;lib:=true__
+	Import-Package: javax.annotation;version=0.0.0,!org.apache.xml.resolver*;resolution:=optional;version=0.0.0,!org.apache.xml.serializer;resolution:=optional;version=0.0.0,!sun.io;resolution:=optional;version=0.0.0,*
+	-includeresource: xalan-2.7.2.jar;xercesImpl-2.12.0.jar;xmlsec-2.0.7.jar;lib:=true
                                 ]]></bnd>
                         </configuration>
                     </execution>
