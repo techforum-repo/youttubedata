@@ -45,6 +45,7 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+	
     <ClaimsProvider>
       <DisplayName>Token Issuer</DisplayName>
       <TechnicalProfiles>
@@ -142,6 +143,7 @@
 			 </TechnicalProfile>			 
 		</TechnicalProfiles>
        </ClaimsProvider>
+	   
 	   <ClaimsProvider>
 		  <DisplayName>Self Asserted</DisplayName>
 		  <TechnicalProfiles>
@@ -161,6 +163,7 @@
 				<InputClaim ClaimTypeReferenceId="displayName" />
 				<InputClaim ClaimTypeReferenceId="givenName" />
 				<InputClaim ClaimTypeReferenceId="surname" />
+				<!-- Add additional fields for Profile Edit -->
 				<InputClaim ClaimTypeReferenceId="city" />
 			  </InputClaims>
 			  <OutputClaims>
@@ -173,6 +176,7 @@
 				<OutputClaim ClaimTypeReferenceId="displayName" />
 				<OutputClaim ClaimTypeReferenceId="givenName" />
 				<OutputClaim ClaimTypeReferenceId="surName" />
+				<!-- Add additional fields for Profile Edit -->
 				<OutputClaim ClaimTypeReferenceId="city" />
 			  </OutputClaims>
 			  <ValidationTechnicalProfiles>
@@ -181,6 +185,7 @@
 			</TechnicalProfile>
 		  </TechnicalProfiles>
 		</ClaimsProvider>
+		
 		<ClaimsProvider>
 			<DisplayName>Azure Active Directory</DisplayName>
 			<TechnicalProfiles>
@@ -201,6 +206,7 @@
 					<!-- Optional claims -->
 					<PersistedClaim ClaimTypeReferenceId="givenName" />
 					<PersistedClaim ClaimTypeReferenceId="surname" />
+					<!-- Enable additional PersistedClaim to persist on Profile Edit -->
 					<PersistedClaim ClaimTypeReferenceId="displayName" />
 					<PersistedClaim ClaimTypeReferenceId="city" />
 				  </PersistedClaims>
@@ -224,6 +230,7 @@
 					<OutputClaim ClaimTypeReferenceId="otherMails" />
 					<OutputClaim ClaimTypeReferenceId="givenName" />
 					<OutputClaim ClaimTypeReferenceId="surname" />
+					<!-- Enable additional Claims to read to display on Profile Edit Page-->
 					<OutputClaim ClaimTypeReferenceId="city" />
 				  </OutputClaims>
 				  <IncludeTechnicalProfile ReferenceId="AAD-Common" />
@@ -280,6 +287,8 @@
 		  </OrchestrationSteps>
 		  <ClientDefinition ReferenceId="DefaultWeb" />
 		</UserJourney>	
+		
+		<!--Profile Edit User Journy, Modified SendClaims with Saml2AssertionIssuer -->
 
 	    <UserJourney Id="ProfileEdit">
 		  <OrchestrationSteps>

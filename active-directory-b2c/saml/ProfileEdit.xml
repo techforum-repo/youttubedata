@@ -24,8 +24,10 @@
 		<OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="displayName" />
         <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="givenName" />
         <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="familyName" />
+		<OutputClaim ClaimTypeReferenceId="SignInName" PartnerClaimType="email" />
 		<OutputClaim ClaimTypeReferenceId="city" PartnerClaimType="city" />
-        <OutputClaim ClaimTypeReferenceId="SignInName" PartnerClaimType="email" />
+		<!-- Enable additional fields to be send to the SP after successful Profile Edit-->
+      
       </OutputClaims>
       <SubjectNamingInfo ClaimType="sub" />
     </TechnicalProfile>
