@@ -67,3 +67,5 @@ Embed dependencies through bnd plugin
                 </executions>
             </plugin>
 ```
+
+**Note - The bundle is build based on AEM as a Cloud Service local SDK, may require chanes to build for other AEM versions**
