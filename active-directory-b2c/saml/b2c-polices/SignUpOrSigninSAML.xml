@@ -26,7 +26,7 @@
         <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="displayName"/>
         <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="givenName"/>
         <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="familyName"/>
-        <OutputClaim ClaimTypeReferenceId="SignInName" PartnerClaimType="email"/>
+        <OutputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="email" />
         <OutputClaim ClaimTypeReferenceId="city" PartnerClaimType="city" />
         <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="" />
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId"/>

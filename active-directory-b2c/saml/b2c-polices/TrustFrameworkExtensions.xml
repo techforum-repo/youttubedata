@@ -136,12 +136,9 @@
 				<OutputClaim ClaimTypeReferenceId="surName" />
 				<!-- Additional City field enabled-->
 				<OutputClaim ClaimTypeReferenceId="city" />
-			  </OutputClaims>
-			  <ValidationTechnicalProfiles>
-				<ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-			  </ValidationTechnicalProfiles>
-			  <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
-			 </TechnicalProfile>			 
+			  </OutputClaims>			
+			 </TechnicalProfile>
+				 
 		</TechnicalProfiles>
        </ClaimsProvider>
 	   
@@ -237,6 +234,14 @@
 				  </OutputClaims>
 				  <IncludeTechnicalProfile ReferenceId="AAD-Common" />
 				</TechnicalProfile>
+				
+				
+				<TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
+					<PersistedClaims>
+						<PersistedClaim ClaimTypeReferenceId="city"/>
+					</PersistedClaims>
+				</TechnicalProfile>
+				
 			</TechnicalProfiles>
 		</ClaimsProvider>	
 
