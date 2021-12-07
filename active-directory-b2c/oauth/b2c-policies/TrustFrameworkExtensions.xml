@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="tenantname.onmicrosoft.com" 
+  PolicyId="B2C_1A_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://tenantname.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
+  
+  <BasePolicy>
+    <TenantId>tenantname.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+  </BasePolicy>
+  <BuildingBlocks>
+
+  </BuildingBlocks>
+
+    <ClaimsProviders>
+	
+	 <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+         <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">0b241044-425a-4e60-b605-07c92b542754</Item>
+            <Item Key="IdTokenAudience">eb0ad211-6493-4b0d-9cc6-c25b1ce29167</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="0b241044-425a-4e60-b605-07c92b542754" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="eb0ad211-6493-4b0d-9cc6-c25b1ce29167" />
+          </InputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+	
+    <ClaimsProvider>
+      <DisplayName>Token Issuer</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="USerInfoIssuer">
+          <DisplayName>JWT Issuer</DisplayName>
+          <Protocol Name="None" />
+          <OutputTokenFormat>JSON</OutputTokenFormat>
+          <CryptographicKeys>
+           <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <!-- The Below claims are what will be returned on the UserInfo Endpoint if in the Claims Bag-->
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="objectId"/>
+            <InputClaim ClaimTypeReferenceId="givenName"/>
+            <InputClaim ClaimTypeReferenceId="surname"/>
+            <InputClaim ClaimTypeReferenceId="displayName"/>
+            <InputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="email"/>
+          </InputClaims>
+          <OutputClaims />
+        </TechnicalProfile>
+        <TechnicalProfile Id="client_assertion">
+          <DisplayName>client_assertion</DisplayName>
+          <Protocol Name="None" />
+          <InputTokenFormat>JWT</InputTokenFormat>
+          <Metadata>
+            <!-- Update the Issuer and Audience below -->
+            <!-- Audience is optional, Issuer is requried-->
+            <Item Key="issuer">https://techforumb2cdemos.b2clogin.com/ab8acae9-0837-4d26-8fc9-b1a667912da9/v2.0/</Item>
+            <!--<Item Key="audience">[ "5910ec66-de5d-4e66-b5f5-1b1bda8583d7" ]</Item>-->
+            <Item Key="client_assertion_type">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</Item>
+          </Metadata>
+            <CryptographicKeys>
+                <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+            </CryptographicKeys>
+            <OutputClaims>
+                <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+                <!-- We can retrieve other claims from the access token if requried -->
+                <!-- <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name"/>
+                <OutputClaim ClaimTypeReferenceId="surname"  PartnerClaimType="family_name"/>
+                <OutputClaim ClaimTypeReferenceId="displayName"  PartnerClaimType="name"/> -->
+            </OutputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    </ClaimsProviders>    
+ <UserJourneys>
+    <UserJourney Id="UserInfoJourney" DefaultCpimIssuerTechnicalProfileReferenceId="UserInfoIssuer">
+     <Authorization>
+        <AuthorizationTechnicalProfiles>
+          <AuthorizationTechnicalProfile ReferenceId="client_assertion" />
+        </AuthorizationTechnicalProfiles>
+      </Authorization>
+       <OrchestrationSteps > 
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges UserIdentity="false">
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+         <OrchestrationStep Order="2" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="USerInfoIssuer" />
+      </OrchestrationSteps>
+    </UserJourney>
+  </UserJourneys>
+
+</TrustFrameworkPolicy>
