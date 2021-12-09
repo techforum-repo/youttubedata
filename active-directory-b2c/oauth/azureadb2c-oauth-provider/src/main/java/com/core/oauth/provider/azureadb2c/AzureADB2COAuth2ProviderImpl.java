@@ -32,6 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adobe.granite.auth.oauth.Provider;
+import com.adobe.granite.auth.oauth.Provider2;
+import com.adobe.granite.auth.oauth.ProviderConfig;
 import com.adobe.granite.auth.oauth.ProviderType;
 import com.adobe.granite.security.user.UserPropertiesService;
 import com.core.oauth.provider.azureadb2c.conf.AzureADB2CConfiguration;
@@ -40,7 +42,7 @@ import com.core.oauth.provider.azureadb2c.models.AzureADB2CConfig;
 @SuppressWarnings("deprecation")
 @Component(name = "Adobe Granite OAuth Azure AD B2C Provider", configurationPid = "com.core.oauth.provider.azureadb2c.config", immediate = true, service = Provider.class)
 @Designate(ocd = AzureADB2CConfiguration.class)
-public class AzureADB2COAuth2ProviderImpl implements Provider {
+public class AzureADB2COAuth2ProviderImpl implements /*Provider2*/ Provider {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -280,5 +282,12 @@ public class AzureADB2COAuth2ProviderImpl implements Provider {
 	public String[] getExtendedDetailsURLs(String scope) {
 		return null;
 	}
+
+	/**@Override
+	public String logout(ProviderConfig config) {
+		return "https://" + this.b2CConfig.getB2CLoginDomain() + "/" + this.b2CConfig.getB2CTenantName()
+				+ ".onmicrosoft.com/" + this.b2CConfig.getB2CSignInSignUpPolicy()
+				+ "/oauth2/v2.0/logout?post_logout_redirect_uri=";
+	}**/
 
 }
