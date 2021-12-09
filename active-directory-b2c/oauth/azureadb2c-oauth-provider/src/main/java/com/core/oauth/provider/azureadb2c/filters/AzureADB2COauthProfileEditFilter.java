@@ -70,10 +70,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 				&& ((HttpServletRequest) request).getRequestURI().endsWith(CALBACK_URL_SUFFIX)
 				&& getCurrentUserId((SlingHttpServletRequest) request).startsWith("b2c-")) {
 
-			System.out.println("getPostRedirectURL((HttpServletRequest) request): "
-					+ getPostRedirectURL((HttpServletRequest) request));
-
-			((HttpServletResponse) response).sendRedirect(getPostRedirectURL((HttpServletRequest) request));
+				((HttpServletResponse) response).sendRedirect(getPostRedirectURL((HttpServletRequest) request));
 
 			return;
 
