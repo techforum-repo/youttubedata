@@ -132,7 +132,7 @@ public class AzureADB2COAuth2ProviderImpl implements Provider2 {
 
 	@Override
 	public User getCurrentUser(SlingHttpServletRequest request) {
-		Authorizable authorizable = (Authorizable) request.adaptTo(Authorizable.class);
+		Authorizable authorizable = request.adaptTo(Authorizable.class);
 		if (authorizable != null && !authorizable.isGroup())
 			return (User) authorizable;
 		return null;
@@ -204,29 +204,35 @@ public class AzureADB2COAuth2ProviderImpl implements Provider2 {
 		}
 	}
 
+	@Override
 	public String getUserIdProperty() {
 		return "email";
 	}
 
+	@Override
 	public String getOAuthIdPropertyPath(String clientId) {
 		return "oauth/oauthid-" + clientId;
 	}
 
+	@Override
 	public String getValidateTokenUrl(String clientId, String token) {
 		this.log.info("This provider doesn't support the validation of a token");
 		return null;
 	}
 
+	@Override
 	public boolean isValidToken(String responseBody, String clientId, String tokenType) {
 		this.log.info("This provider doesn't support the validation of a token");
 		return false;
 	}
 
+	@Override
 	public String getUserIdFromValidateTokenResponseBody(String responseBody) {
 		this.log.info("This provider doesn't support the validation of a token");
 		return null;
 	}
 
+	@Override
 	public String getErrorDescriptionFromValidateTokenResponseBody(String responseBody) {
 		this.log.info("This provider doesn't support the validation of a token");
 		return null;
@@ -278,11 +284,10 @@ public class AzureADB2COAuth2ProviderImpl implements Provider2 {
 	}
 
 	@Override
-	public String logout(ProviderConfig arg0) {
-		String redirectURL = arg0.getCallBackUrl().split("/callback/j_security_check")[0];
+	public String logout(ProviderConfig config) {
 		return "https://" + this.b2CConfig.getB2CLoginDomain() + "/" + this.b2CConfig.getB2CTenantName()
 				+ ".onmicrosoft.com/" + this.b2CConfig.getB2CSignInSignUpPolicy()
-				+ "/oauth2/v2.0/logout?post_logout_redirect_uri=" + redirectURL;
+				+ "/oauth2/v2.0/logout?post_logout_redirect_uri=" + config.getCallBackUrl();
 	}
 
 }

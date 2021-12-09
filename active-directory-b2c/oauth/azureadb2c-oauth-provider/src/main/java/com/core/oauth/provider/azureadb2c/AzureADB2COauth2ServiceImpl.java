@@ -39,6 +39,7 @@ public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Token getAccessToken(Token requestToken, Verifier verifier) {
 		Response response = getOAuthRequest(verifier, this.b2CConfig.getB2CSignInSignUpPolicy()).send();
 		try {
@@ -74,6 +75,7 @@ public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Token getRequestToken() {
 		throw new UnsupportedOperationException(
 				"Unsupported operation, please use 'getAuthorizationUrl' and redirect your users there");
@@ -82,6 +84,7 @@ public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getVersion() {
 		return VERSION;
 	}
@@ -89,6 +92,7 @@ public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void signRequest(Token accessToken, OAuthRequest request) {
 		request.addHeader("Authorization", "Bearer " + accessToken.getToken());
 	}
@@ -96,6 +100,7 @@ public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getAuthorizationUrl(Token requestToken) {
 		return api.getAuthorizationUrl(config);
 	}

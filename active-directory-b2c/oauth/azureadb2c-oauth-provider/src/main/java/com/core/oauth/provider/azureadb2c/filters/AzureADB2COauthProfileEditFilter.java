@@ -31,7 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adobe.granite.crypto.CryptoSupport;
-import com.core.oauth.provider.azureadb2c.models.OAuthToken;
+import com.core.oauth.provider.azureadb2c.models.OAuthTokenModel;
+import com.core.oauth.provider.azureadb2c.utils.AzureADB2COAuth2ProviderUtils;
 import com.day.crx.security.token.TokenCookie;
 
 @Component
@@ -69,9 +70,10 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 				&& ((HttpServletRequest) request).getRequestURI().endsWith(CALBACK_URL_SUFFIX)
 				&& getCurrentUserId((SlingHttpServletRequest) request).startsWith("b2c-")) {
 
-			String redirectURL = ((HttpServletRequest) request).getRequestURI().split(CALBACK_URL_SUFFIX)[0];
+			System.out.println("getPostRedirectURL((HttpServletRequest) request): "
+					+ getPostRedirectURL((HttpServletRequest) request));
 
-			((HttpServletResponse) response).sendRedirect(redirectURL);
+			((HttpServletResponse) response).sendRedirect(getPostRedirectURL((HttpServletRequest) request));
 
 			return;
 
@@ -81,11 +83,13 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 
 			try {
 
-				((HttpServletResponse) response).sendRedirect(
-						getEditRedirectURL((HttpServletResponse) response, (HttpServletRequest) request, configId));
+				String authURL = getAuthorizationURL((HttpServletResponse) response, (HttpServletRequest) request,
+						configId);
+
+				((HttpServletResponse) response).sendRedirect(authURL);
 				return;
 			} catch (Exception e) {
-				this.log.error("Fatal error while sending Authn request.", (Throwable) e);
+				this.log.error("Fatal error while sending Authn request.", e);
 				((HttpServletResponse) response).sendError(500,
 						"Internal server error, please contact your administrator");
 				return;
@@ -96,26 +100,15 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 		filterChain.doFilter(request, response);
 	}
 
-	String getEditRedirectURL(HttpServletResponse response, HttpServletRequest request, String configId)
+	String getAuthorizationURL(HttpServletResponse response, HttpServletRequest request, String configId)
 			throws Exception {
 
-		Configuration[] configurations = this.configurationAdmin.listConfigurations("(&(" + "oauth.config.id" + "="
-				+ configId + ")(" + "service.factoryPid" + "=" + "com.adobe.granite.auth.oauth.provider" + "))");
+		Configuration[] configurations = getConfigurations(configId);
 
 		if (configurations != null && configurations.length >= 1) {
 
-			TokenCookie.setCookie(((HttpServletResponse) response), "oauth-configid", configId, -1, "/", null, true,
-					request.isSecure());
-
-			String state = (new BigInteger(130, new SecureRandom())).toString(32);
-
-			OAuthToken token = new OAuthToken(configurations[0].getProperties().get("oauth.client.id").toString(), "",
-					"", 1);
-			token.setAttribute("state", state);
-			token.setAttribute("oauth-redirect", "");
-
-			TokenCookie.setCookie(response, configurations[0].getProperties().get("oauth.client.id").toString(),
-					"\"" + cryptoSupport.protect(token.toJSON()) + "\"", 600, "/", null, true, request.isSecure());
+			setTokenCookies(request, response, configId,
+					configurations[0].getProperties().get("oauth.client.id").toString(), cryptoSupport);
 
 			StringBuilder result = new StringBuilder();
 			String separator = "";
@@ -125,18 +118,24 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 				separator = ",";
 			}
 
-			String returnURL = configurations[0].getProperties().get("oauth.callBackUrl").toString();
+			Object callbackURL = configurations[0].getProperties().get("oauth.callBackUrl");
+
+			String returnURL = (callbackURL != null && !callbackURL.toString().startsWith("/")) ? callbackURL.toString()
+					: AzureADB2COAuth2ProviderUtils.getOAuthReturntURI(request, callbackURL,
+							"/callback/j_security_check");
 
 			Configuration b2CProviderConfig = configurationAdmin
 					.getConfiguration("com.core.oauth.provider.azureadb2c.config");
 
 			if (!getCurrentUserId((SlingHttpServletRequest) request).equals("anonymous"))
-				returnURL = configurations[0].getProperties().get("oauth.callBackUrl").toString()
-						.split("/callback/j_security_check")[0] + "/oauth/callback";
+				returnURL = (callbackURL != null && !callbackURL.toString().startsWith("/")) ? callbackURL.toString()
+						: AzureADB2COAuth2ProviderUtils.getOAuthReturntURI(request, callbackURL, CALBACK_URL_SUFFIX);
 
 			String profileEditURL = "https://" + b2CProviderConfig.getProperties().get("b2cLoginDomain") + "/"
 					+ b2CProviderConfig.getProperties().get("b2cTenantName") + ".onmicrosoft.com/"
 					+ "/oauth2/v2.0/authorize?p=%s&client_id=%s&response_type=code&redirect_uri=%s&response_mode=query&scope=%s&state=%s";
+
+			String state = (new BigInteger(130, new SecureRandom())).toString(32);
 
 			return String.format(profileEditURL, b2CProviderConfig.getProperties().get("b2cEditPolicyName"),
 					configurations[0].getProperties().get("oauth.client.id").toString(), returnURL, result.toString(),
@@ -147,7 +146,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 
 	}
 
-	public String getCurrentUserId(SlingHttpServletRequest request) {
+	private String getCurrentUserId(SlingHttpServletRequest request) {
 		ResourceResolver resolver = request.getResourceResolver();
 		Session session = resolver.adaptTo(Session.class);
 		String userId = session.getUserID();
@@ -155,9 +154,58 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 
 	}
 
+	private String getPostRedirectURL(HttpServletRequest request) {
+
+		String redirectURL = AzureADB2COAuth2ProviderUtils.getOAuthReturntURI(request, null, null);
+
+		try {
+
+			Configuration[] configurations = getConfigurations(TokenCookie.getCookie(request, "oauth-configid"));
+
+			if (configurations != null && configurations.length >= 1) {
+				String cookie = TokenCookie.getCookie(request,
+						configurations[0].getProperties().get("oauth.client.id").toString());
+
+				redirectURL = OAuthTokenModel.fromJSON(cryptoSupport.unprotect(cookie)).getAttributes()
+						.get("oauth-redirect").toString();
+
+			}
+
+		} catch (Exception e) {
+			log.error("Error in getPostRedirectURL:" + e.getMessage());
+		}
+
+		return redirectURL;
+
+	}
+
+	void setTokenCookies(HttpServletRequest request, HttpServletResponse response, String configId, String clientId,
+			CryptoSupport cryptoSupport) throws Exception {
+
+		TokenCookie.setCookie(response, "oauth-configid", configId, -1, "/", null, true, request.isSecure());
+
+		String state = (new BigInteger(130, new SecureRandom())).toString(32);
+
+		OAuthTokenModel token = new OAuthTokenModel(clientId, "", "", 1);
+
+		token.setAttribute("state", state);
+		token.setAttribute("oauth-redirect", request.getRequestURI());
+
+		TokenCookie.setCookie(response, clientId, "\"" + cryptoSupport.protect(token.toJSON()) + "\"", -1, "/", null,
+				true, request.isSecure());
+
+	}
+
+	Configuration[] getConfigurations(String configId) throws Exception {
+
+		Configuration[] configurations = this.configurationAdmin.listConfigurations("(&(" + "oauth.config.id" + "="
+				+ configId + ")(" + "service.factoryPid" + "=" + "com.adobe.granite.auth.oauth.provider" + "))");
+
+		return configurations;
+	}
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 
 	}
 

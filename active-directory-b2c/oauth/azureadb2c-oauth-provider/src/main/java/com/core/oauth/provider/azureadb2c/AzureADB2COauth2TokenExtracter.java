@@ -17,9 +17,8 @@ public class AzureADB2COauth2TokenExtracter implements AccessTokenExtractor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Token extract(String response) {
-
-		System.out.println("token response: " + response);
 		Preconditions.checkEmptyString(response,
 				"Response body is incorrect. Can't extract a token from an empty string");
 
