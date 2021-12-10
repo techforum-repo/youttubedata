@@ -14,7 +14,7 @@ Change the -Daem.port value to deploy the bundle to the server running on differ
 
 ## Filter to handle B2C Profile Edit(Local Account) with OAuth - AzureADB2COauthProfileEditFilter.java ##
 
-The Filter sends POST request to B2C profile edit policy URL - **https://tenantname.b2clogin.com/tenantname.onmicrosoft.com//oauth2/v2.0/authorize** with the required parameters
+The Filter redirects the user to B2C profile edit policy URL - **https://tenantname.b2clogin.com/tenantname.onmicrosoft.com//oauth2/v2.0/authorize** with the required parameters
 
 ```
 https://tenantname.b2clogin.com/tenantname.onmicrosoft.com//oauth2/v2.0/authorize?p=B2C_1A_ProfileEdit&client_id=xxxxxxxxxxxx&response_type=code&redirect_uri=https://localhost/content/wknd/us/en.html/callback/j_security_check&response_mode=query&scope=xxxxxxxxxxxxxxxxxxxx&state=xxxxxxxxxxxxxxxxxxx
