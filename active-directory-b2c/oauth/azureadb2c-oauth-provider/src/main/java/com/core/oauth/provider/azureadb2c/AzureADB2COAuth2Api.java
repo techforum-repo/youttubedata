@@ -7,6 +7,12 @@ import org.scribe.oauth.OAuthService;
 
 import com.core.oauth.provider.azureadb2c.models.AzureADB2CConfig;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 public class AzureADB2COAuth2Api extends DefaultApi20 {
 
 	AzureADB2CConfig b2CConfig;

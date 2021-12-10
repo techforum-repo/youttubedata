@@ -1,15 +1,12 @@
 package com.core.oauth.provider.azureadb2c;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.auth.core.spi.AuthenticationHandler;
 import org.apache.sling.auth.core.spi.AuthenticationInfo;
-import org.apache.sling.engine.EngineConstants;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
@@ -17,8 +14,13 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.propertytypes.ServiceDescription;
 import org.osgi.service.component.propertytypes.ServiceRanking;
 
-import com.adobe.granite.auth.oauth.Provider;
 import com.core.oauth.provider.azureadb2c.utils.AzureADB2COAuth2ProviderUtils;
+
+/**
+ * 
+ * @author albin
+ *
+ */
 
 @Component(name = "Azure AD B2C - OAuth Logout Handler", service = AuthenticationHandler.class, property = {
 		AuthenticationHandler.PATH_PROPERTY + "=" + "/", })

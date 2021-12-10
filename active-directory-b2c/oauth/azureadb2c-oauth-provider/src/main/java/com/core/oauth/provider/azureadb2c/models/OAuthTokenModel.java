@@ -8,6 +8,12 @@ import java.util.Map;
 import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 public class OAuthTokenModel {
 
 	private int _state;

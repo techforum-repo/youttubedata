@@ -5,6 +5,12 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 public class AzureADB2COAuth2ProviderUtils {
 
 	public static String getOAuthReturntURI(HttpServletRequest request, Object callbackURL, String sufixURL) {
@@ -14,7 +20,7 @@ public class AzureADB2COAuth2ProviderUtils {
 		buf.append(getHostValue(request));
 		if (callbackURL != null && !callbackURL.toString().isBlank())
 			buf.append(callbackURL);
-		if (sufixURL != null && !sufixURL.toString().isBlank())
+		if (sufixURL != null && !sufixURL.isBlank())
 			buf.append(sufixURL);
 		return buf.toString();
 	}

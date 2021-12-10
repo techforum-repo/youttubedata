@@ -9,6 +9,12 @@ import org.scribe.model.Token;
 import org.scribe.utils.OAuthEncoder;
 import org.scribe.utils.Preconditions;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 public class AzureADB2COauth2TokenExtracter implements AccessTokenExtractor {
 
 	private static final String TOKEN_REGEX = "access_token\":\"([^\"]+)";

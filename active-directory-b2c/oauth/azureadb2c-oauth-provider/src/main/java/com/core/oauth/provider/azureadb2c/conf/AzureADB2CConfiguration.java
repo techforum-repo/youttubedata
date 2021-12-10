@@ -3,6 +3,12 @@ package com.core.oauth.provider.azureadb2c.conf;
 import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 @ObjectClassDefinition(name = "Azure AD B2C Provider Configuration", description = "Azure AD B2C Provider Configuration")
 public @interface AzureADB2CConfiguration {
 

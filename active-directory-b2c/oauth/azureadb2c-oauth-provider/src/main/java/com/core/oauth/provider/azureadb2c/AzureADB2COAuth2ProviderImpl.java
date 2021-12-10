@@ -12,6 +12,7 @@ import javax.jcr.Session;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.json.JSONException;
@@ -38,6 +39,13 @@ import com.adobe.granite.auth.oauth.ProviderType;
 import com.adobe.granite.security.user.UserPropertiesService;
 import com.core.oauth.provider.azureadb2c.conf.AzureADB2CConfiguration;
 import com.core.oauth.provider.azureadb2c.models.AzureADB2CConfig;
+import com.core.oauth.provider.azureadb2c.utils.Constants;
+
+/**
+ * 
+ * @author albin
+ *
+ */
 
 @SuppressWarnings("deprecation")
 @Component(name = "Adobe Granite OAuth Azure AD B2C Provider", configurationPid = "com.core.oauth.provider.azureadb2c.config", immediate = true, service = Provider.class)
@@ -55,11 +63,13 @@ public class AzureADB2COAuth2ProviderImpl implements /*Provider2*/ Provider {
 	private ResourceResolver serviceUserResolver;
 
 	private Session session;
+	
+	
 
 	private String id;
 	private String name;
 	private AzureADB2CConfig b2CConfig;
-	private static final String USER_ADMIN = "oauth-azureadb2c-service";
+	
 
 	@Override
 	public String getId() {
@@ -216,30 +226,30 @@ public class AzureADB2COAuth2ProviderImpl implements /*Provider2*/ Provider {
 
 	@Override
 	public String getValidateTokenUrl(String clientId, String token) {
-		this.log.info("This provider doesn't support the validation of a token");
+		this.log.info(Constants.NOT_SUPPORTED_MESSAGE);
 		return null;
 	}
 
 	@Override
 	public boolean isValidToken(String responseBody, String clientId, String tokenType) {
-		this.log.info("This provider doesn't support the validation of a token");
+		this.log.info(Constants.NOT_SUPPORTED_MESSAGE);
 		return false;
 	}
 
 	@Override
 	public String getUserIdFromValidateTokenResponseBody(String responseBody) {
-		this.log.info("This provider doesn't support the validation of a token");
+		this.log.info(Constants.NOT_SUPPORTED_MESSAGE);
 		return null;
 	}
 
 	@Override
 	public String getErrorDescriptionFromValidateTokenResponseBody(String responseBody) {
-		this.log.info("This provider doesn't support the validation of a token");
+		this.log.info(Constants.NOT_SUPPORTED_MESSAGE);
 		return null;
 	}
 
 	@Activate
-	protected void activate(final AzureADB2CConfiguration config) throws Exception {
+	protected void activate(final AzureADB2CConfiguration config) throws LoginException  {
 		name = getClass().getSimpleName();
 		id = config.providerId();
 
@@ -249,15 +259,15 @@ public class AzureADB2COAuth2ProviderImpl implements /*Provider2*/ Provider {
 		b2CConfig.setB2CSignInSignUpPolicy(config.b2cSignInSignUpPolicyName());
 		b2CConfig.setB2CEditPolicy(config.b2cEditPolicyName());
 
-		Map<String, Object> serviceParams = new HashMap<String, Object>();
-		serviceParams.put(ResourceResolverFactory.SUBSERVICE, USER_ADMIN);
+		Map<String, Object> serviceParams = new HashMap<>();
+		serviceParams.put(ResourceResolverFactory.SUBSERVICE, Constants.USER_ADMIN);
 		serviceUserResolver = this.resourceResolverFactory.getServiceResourceResolver(serviceParams);
 		session = serviceUserResolver.adaptTo(Session.class);
 
 	}
 
 	@Deactivate
-	protected void deactivate(final ComponentContext componentContext) throws Exception {
+	protected void deactivate(final ComponentContext componentContext) {
 		log.debug("deactivating provider id {}", id);
 		if (session != null && session.isLive()) {
 			try {
@@ -280,7 +290,7 @@ public class AzureADB2COAuth2ProviderImpl implements /*Provider2*/ Provider {
 
 	@Override
 	public String[] getExtendedDetailsURLs(String scope) {
-		return null;
+		return new String[0];
 	}
 
 	/**@Override

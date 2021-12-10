@@ -19,7 +19,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.servlets.annotations.SlingServletFilter;
 import org.apache.sling.servlets.annotations.SlingServletFilterScope;
-import org.apache.sling.xss.XSSAPI;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
@@ -30,10 +30,18 @@ import org.osgi.service.component.propertytypes.ServiceVendor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adobe.granite.crypto.CryptoException;
 import com.adobe.granite.crypto.CryptoSupport;
 import com.core.oauth.provider.azureadb2c.models.OAuthTokenModel;
 import com.core.oauth.provider.azureadb2c.utils.AzureADB2COAuth2ProviderUtils;
+import com.core.oauth.provider.azureadb2c.utils.Constants;
 import com.day.crx.security.token.TokenCookie;
+
+/**
+ * 
+ * @author albin
+ *
+ */
 
 @Component
 @SlingServletFilter(scope = { SlingServletFilterScope.REQUEST }, pattern = ".*", methods = { "GET" })
@@ -42,8 +50,6 @@ import com.day.crx.security.token.TokenCookie;
 @ServiceVendor("Adobe")
 public class AzureADB2COauthProfileEditFilter implements Filter {
 
-	@Reference
-	XSSAPI xssAPI;
 
 	@Reference
 	private CryptoSupport cryptoSupport;
@@ -105,7 +111,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 		if (configurations != null && configurations.length >= 1) {
 
 			setTokenCookies(request, response, configId,
-					configurations[0].getProperties().get("oauth.client.id").toString(), cryptoSupport);
+					configurations[0].getProperties().get(Constants.OAUTH_CLIENT_ID).toString(), cryptoSupport);
 
 			StringBuilder result = new StringBuilder();
 			String separator = "";
@@ -135,7 +141,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 			String state = (new BigInteger(130, new SecureRandom())).toString(32);
 
 			return String.format(profileEditURL, b2CProviderConfig.getProperties().get("b2cEditPolicyName"),
-					configurations[0].getProperties().get("oauth.client.id").toString(), returnURL, result.toString(),
+					configurations[0].getProperties().get(Constants.OAUTH_CLIENT_ID).toString(), returnURL, result.toString(),
 					state);
 		}
 
@@ -146,8 +152,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 	private String getCurrentUserId(SlingHttpServletRequest request) {
 		ResourceResolver resolver = request.getResourceResolver();
 		Session session = resolver.adaptTo(Session.class);
-		String userId = session.getUserID();
-		return userId;
+		return session.getUserID();
 
 	}
 
@@ -161,7 +166,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 
 			if (configurations != null && configurations.length >= 1) {
 				String cookie = TokenCookie.getCookie(request,
-						configurations[0].getProperties().get("oauth.client.id").toString());
+						configurations[0].getProperties().get(Constants.OAUTH_CLIENT_ID).toString());
 
 				redirectURL = OAuthTokenModel.fromJSON(cryptoSupport.unprotect(cookie)).getAttributes()
 						.get("oauth-redirect").toString();
@@ -169,7 +174,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 			}
 
 		} catch (Exception e) {
-			log.error("Error in getPostRedirectURL:" + e.getMessage());
+			log.error(String.format("Error in getPostRedirectURL:%s",e.getMessage()));
 		}
 
 		return redirectURL;
@@ -177,7 +182,7 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 	}
 
 	void setTokenCookies(HttpServletRequest request, HttpServletResponse response, String configId, String clientId,
-			CryptoSupport cryptoSupport) throws Exception {
+			CryptoSupport cryptoSupport) throws CryptoException, IOException {
 
 		TokenCookie.setCookie(response, "oauth-configid", configId, -1, "/", null, true, request.isSecure());
 
@@ -193,17 +198,15 @@ public class AzureADB2COauthProfileEditFilter implements Filter {
 
 	}
 
-	Configuration[] getConfigurations(String configId) throws Exception {
+	Configuration[] getConfigurations(String configId) throws IOException, InvalidSyntaxException  {
 
-		Configuration[] configurations = this.configurationAdmin.listConfigurations("(&(" + "oauth.config.id" + "="
-				+ configId + ")(" + "service.factoryPid" + "=" + "com.adobe.granite.auth.oauth.provider" + "))");
-
-		return configurations;
+		return this.configurationAdmin.listConfigurations("(&(" + "oauth.config.id" + "="
+				+ configId + ")(" + "service.factoryPid" + "=" + "com.adobe.granite.auth.oauth.provider" + "))");		 
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override

@@ -1,5 +1,11 @@
 package com.core.oauth.provider.azureadb2c.models;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 public class AzureADB2CConfig {
 
 	private String b2CLoginDomain;

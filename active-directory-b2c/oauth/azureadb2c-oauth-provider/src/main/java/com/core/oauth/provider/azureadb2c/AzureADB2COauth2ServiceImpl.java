@@ -14,6 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import com.core.oauth.provider.azureadb2c.models.AzureADB2CConfig;
 
+/**
+ * 
+ * @author albin
+ *
+ */
+
 @SuppressWarnings("deprecation")
 public class AzureADB2COauth2ServiceImpl implements OAuthService {
 	private static final String VERSION = "2.0";
