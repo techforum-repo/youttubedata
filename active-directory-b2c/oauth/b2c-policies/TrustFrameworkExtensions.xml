@@ -23,12 +23,12 @@
       <TechnicalProfiles>
          <TechnicalProfile Id="login-NonInteractive">
           <Metadata>
-            <Item Key="client_id">0b241044-425a-4e60-b605-07c92b542754</Item>
-            <Item Key="IdTokenAudience">eb0ad211-6493-4b0d-9cc6-c25b1ce29167</Item>
+            <Item Key="client_id">ProxyIdentityExperienceFrameworkAppId</Item>
+            <Item Key="IdTokenAudience">IdentityExperienceFrameworkAppId</Item>
           </Metadata>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="0b241044-425a-4e60-b605-07c92b542754" />
-            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="eb0ad211-6493-4b0d-9cc6-c25b1ce29167" />
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="ProxyIdentityExperienceFrameworkAppId" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="IdentityExperienceFrameworkAppId" />
           </InputClaims>
         </TechnicalProfile>
       </TechnicalProfiles>
@@ -61,7 +61,7 @@
           <Metadata>
             <!-- Update the Issuer and Audience below -->
             <!-- Audience is optional, Issuer is requried-->
-            <Item Key="issuer">https://techforumb2cdemos.b2clogin.com/ab8acae9-0837-4d26-8fc9-b1a667912da9/v2.0/</Item>
+            <Item Key="issuer">https://yourtenant.b2clogin.com/11111111-1111-1111-1111-111111111111/v2.0/</Item>
             <!--<Item Key="audience">[ "5910ec66-de5d-4e66-b5f5-1b1bda8583d7" ]</Item>-->
             <Item Key="client_assertion_type">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</Item>
           </Metadata>
