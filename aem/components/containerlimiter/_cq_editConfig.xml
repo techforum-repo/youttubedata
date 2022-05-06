@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:EditConfig">
+    <cq:listeners
+        jcr:primaryType="cq:EditListenersConfig"
+        afterchildinsert="function(childEditable){&#xa;&#xa;var path = childEditable.path;&#xa;var date = new Date();&#xa;var servletURL = '/bin/ComponentLimiterSevlet?' + date.getTime();&#xa;var requestData = 'componentPath='+path;&#xa;&#xa;$.ajax({&#xa;async:false,&#xa;type:'GET',&#xa;url : servletURL,&#xa;dataType:'text',&#xa;data: requestData,&#xa;success:function(returnData)&#xa;{&#xa;&#xa;if(returnData=='false')&#xa;{&#xa;&#x9;var cmp = childEditable.getParent();&#xa;&#x9;cmp.refresh();&#xa;&#x9;showErrorAlert('Cannot drop more component, if you want to add more, please set the Max component allowed bigger.','Error');&#xa;}&#xa;&#xa;}})&#xa;&#xa;&#xa;function showErrorAlert(message, title) {  &#xa;       var fui = $(window).adaptTo(&quot;foundation-ui&quot;),  &#xa;         options = [{  &#xa;           text: &quot;OK&quot;,  &#xa;           warning: true  &#xa;         }];  &#xa;       message = message || &quot;Unknown Error&quot;;  &#xa;       title = title || &quot;Error&quot;;  &#xa;       fui.prompt(title, message, &quot;error&quot;, options);  &#xa;     } &#xa;&#xa;}"/>
+</jcr:root>
