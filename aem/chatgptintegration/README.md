@@ -30,5 +30,5 @@ To build all the modules and deploy the `all` package to a local instance of AEM
 	
 ## Blog Refernce
 
-To be updated
+https://medium.com/p/312651291713
 
