@@ -24,6 +24,10 @@ Update the Open AI API token in the ChatServlet, the API token can be reterived 
 
 ![alt text](https://github.com/techforum-repo/images/blob/main/chatgpt-api-keys.jpg?raw=true)
 
+The project is built based on AEM as a CLoud SDK; update the SDK API version in parent pom.xml based on your local SDK version before building and deploying the project
+
+```<aem.sdk.api>2022.9.8722.20220912T101352Z-220800</aem.sdk.api>```
+
 To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the following command:
 
     mvn clean install -PautoInstallSinglePackage
