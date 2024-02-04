@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Channel Demo - Main Page</title>      
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var channel = new MessageChannel();
+            var iframe = document.getElementById('iframe1');
+
+            // Setup message event listener on port1 to handle incoming messages
+            channel.port1.onmessage = function (e) {
+                var output = document.getElementById("output");
+				 alert("Received message from iframe: " + e.data);
+                output.innerHTML = e.data;
+               
+            };
+
+            // Once the iframe is loaded, send port2 to the iframe
+            iframe.addEventListener("load", function () {
+                // Transfer port2 to the iframe when it's ready
+                iframe.contentWindow.postMessage("port for iframe", "*", [channel.port2]);
+                
+                // Now we can send messages to the iframe via port1
+                sendMessageToIframe("Hello from the main page!!");
+            });
+
+            // Function to send messages to the iframe via port1
+            function sendMessageToIframe(message) {
+                channel.port1.postMessage(message);
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Message Channel Demo - Inside Index.html</h1>
+    <p id="output">...</p>
+    <iframe id="iframe1" src="https://embed-demo.com/embed.html" style="height:500px;width:100%;"></iframe>
+</body>
+</html>

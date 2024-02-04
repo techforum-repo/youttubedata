@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Channel Demo - Iframe</title>     
+    <script type="text/javascript">
+        window.addEventListener("message", function (e) {
+            // Check for the message that carries port2
+            if (e.data === "port for iframe" && e.ports[0]) {
+                var port2 = e.ports[0];
+                var output = document.getElementById("output");
+
+                // Setup message event listener on port2 to handle incoming messages
+                port2.onmessage = function (event) {
+					alert("Received message from Main Page: " + event.data);
+                    output.innerHTML = event.data;
+					// Send a message back to the main page via port2
+					port2.postMessage("Message back from the Iframe");
+                    
+                };
+
+              
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Message Channel Demo - Iframe</h1>
+    <p id="output">....</p>
+</body>
+</html>

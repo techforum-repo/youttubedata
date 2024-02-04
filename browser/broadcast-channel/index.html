@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Broadcast Demo - Index</title>		
+		
+		<script type = "text/javascript">
+		
+			document.addEventListener("DOMContentLoaded", function () {
+				const broadcast = new BroadcastChannel('channel-test');
+				var output = document.getElementById("output");
+				output.innerHTML = '';	
+				const message = "Hello from the index.html!";
+				
+				var time=Date.now();
+				
+				 var iframe = document.getElementById('iframe1');
+				
+				 iframe.addEventListener("load", function () {			 
+					// Send message
+					broadcast.postMessage({ type: 'MSG_INDEX', message: message,time:time});			 
+				 });
+				 
+				// Listen to messages
+				broadcast.onmessage = (event) => {
+					if (event.data && event.data.type === 'MSG_IFRAME') {
+					//if (event.data && event.data.type === 'MSG_IFRAME') {
+                        var msg='Received message in Index: ' + event.data.message +' '+event.data.time;					
+						output.innerHTML = msg;	
+						console.log(msg);
+					}
+				};
+			});
+
+			
+		</script>
+		
+		
+	</head>
+	<body>
+	
+		<h1>Broadcast Demo - Inside Index.html</h1>
+		
+		 <p id="output">...</p>
+		
+		<iframe id="iframe1" src="https://sitea-demo.com/embed.html" style="height:500px;width:100%;"></iframe>
+		<!--<iframe id="iframe1" src="https://embed-demo.com/embed.html" style="height:500px;width:100%;"></iframe>-->
+	
+	</body>
+</html>

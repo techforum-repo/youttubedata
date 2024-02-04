@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Broadcast Demo - Inside Iframe</title>		
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", function () {
+				const broadcast = new BroadcastChannel('channel-test');
+				var output = document.getElementById("output");
+				output.innerHTML = '';	
+				var time;
+				const message = "Hello from the iframe!";			
+				
+				// Listen to messages
+				broadcast.onmessage = (event) => {
+					if (event.data && event.data.type === 'MSG_INDEX') {						
+						time=event.data.time;						
+						var msg='Received message in Iframe: ' + event.data.message+' '+time;				
+						output.innerHTML = 	msg;
+						console.log(msg);
+						
+						// Send message
+					broadcast.postMessage({ type: 'MSG_IFRAME', message: message,time:time}); 
+					}
+					
+					
+				};
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<h1>Broadcast Demo - Inside Iframe</h1>
+		 <p id="output">...</p>
+	</body>
+</html>

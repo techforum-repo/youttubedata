@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Broadcast Demo - Inside Test.html</title>		
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", function () {
+				const broadcast = new BroadcastChannel('channel-test');
+				var output = document.getElementById("output");
+				output.innerHTML='';
+				
+				//listen to messages
+				broadcast.onmessage = (event) => {
+					if (event.data && event.data.type === 'MSG_INDEX') {				
+						var msg='Inside test.html: '+event.data.message+ ' '+event.data.time;				
+						output.innerHTML = 	msg;
+						console.log(msg);
+						
+					}
+				};
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Broadcast Demo - Inside Test.html</h1>
+		 <p id="output">...</p>
+	</body>
+</html>

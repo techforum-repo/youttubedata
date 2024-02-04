@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Embed - Iframe</title>
+    <script>
+        // Function to send a message to the parent window
+        function sendMessageToParent() {
+            const message = "Hello from the iframe!";
+            window.parent.postMessage(message, "*");
+        }
+
+        // Function to handle messages received from the parent window
+        function receiveMessageFromParent(event) {
+            const receivedMessage = event.data;
+            alert("Received message from parent: " + receivedMessage);
+        }
+
+        // Add an event listener to handle messages from the parent window
+        window.addEventListener("message", receiveMessageFromParent);
+    </script>
+</head>
+<body>
+    <h1>Embed - Iframe</h1>
+
+    <!-- Button to send a message to the parent window -->
+    <button onclick="sendMessageToParent()">Send Message to Parent Window</button>
+</body>
+</html>
