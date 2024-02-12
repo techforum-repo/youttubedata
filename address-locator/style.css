@@ -1,0 +1,84 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#container {
+    display: flex;
+    height: 100%;
+
+}
+
+#location-list {
+    width: 25%; 
+    overflow-y: auto;
+    height: 550px;
+    background-color: lightgray; /* Temporarily for visibility */
+    padding: 10px;
+}
+
+#location-map {
+    width: 75%; 
+    height: 100%; /* Adjust as needed */
+}
+
+.location h3 {
+    cursor: pointer;
+    color: blue;
+    margin-top: 0;
+    text-decoration: none;
+}
+
+.location h3:hover {
+    text-decoration: underline;
+}
+
+
+.map-info-window {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    outline: none;
+}
+
+.map-info-window p {
+    margin-top: 0;
+}
+
+.map-info-window-store-name {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Hide the close button in the InfoWindow */
+.gm-ui-hover-effect {
+    display: none !important;
+}
+
+.gm-style .gm-style-iw {
+    background-color: green;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: hidden !important;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}

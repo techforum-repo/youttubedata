@@ -1,0 +1,68 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -93.1567401,
+                    44.832337
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "category": "Store",
+                "hours": "Open 24 hours",
+                "description": "Cub is Minnesota's hometown grocer",
+                "name": "Cub - Eagan North",
+                "phone": "(651) 452-9506",
+                "address": "1276 Town Centre Dr, Eagan, MN 55123",
+                "website": "https://www.cub.com/sm/pickup/rsid/1695",
+                "type": "grocery",
+                "locationid": "01"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -93.1618668,
+                    44.8284662
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "category": "Store",
+                "hours": "6 AM - 11 PM",
+                "description": "Walmart in Eagan, MN | Electronics, Toys, Furniture",
+                "name": "Walmart - Eagan",
+                "phone": "(651) 686-7428",
+                "address": "1360 Town Centre Dr, Eagan, MN 55123",
+                "website": "https://www.walmart.com/store/1786-eagan-mn",
+                "type": "retailer",
+                "locationid": "02"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -93.248703,
+                    44.731957
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "category": "Store",
+                "hours": "6 AM - 11 PM",
+                "description": "Walmart super center in Apple Vally, MN | Electronics, Toys, Furniture",
+                "name": "Walmart - Apple Valley Supercenter",
+                "phone": "952-431-9700",
+                "address": "7835 150th St W, Apple Valley, MN 55124",
+                "website": "https://www.walmart.com/store/2642-apple-valley-mn",
+                "type": "retailer",
+                "locationid": "03"
+            }
+        }
+    ]
+}
