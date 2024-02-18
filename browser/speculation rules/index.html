@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<title>Index</title>
+
+	<!--<script type="speculationrules">
+
+			{
+				"prefetch": [
+					{
+						"source": "list",
+						"urls": ["test1.html", "test2.html"]
+					}				
+				],
+				"prerender": [
+					{
+						"source": "list",
+						"urls": ["test3.html"]
+					}
+				 ]				
+			}
+			
+		</script>-->
+
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			if (HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules")) {
+				const specScript = document.createElement("script");
+				specScript.type = "speculationrules";
+				console.log('Speculation Rules Supported...');
+				const specRules = {
+					"prefetch": [
+						{
+							"source": "list",
+							"urls": ["test1.html", "test2.html"],
+							"relative_to": "document"							
+						},
+						{
+							"source": "list",
+							"urls": ["https://www.albinsblog.com"], //only HTTPS supported for cross origin URLs
+							//"requires": ["anonymous-client-ip-when-cross-origin"],				
+							"referrer_policy": "no-referrer",
+							//"eagerness": "moderate"
+						},
+
+						/*{
+							"source": "document",
+							"where": {
+								"or": [
+									{ "href_matches": "/test1*" },
+									{ "href_matches": "/test2*" },
+								]
+							},
+							"eagerness": "moderate"
+
+						}*/
+
+						
+					],
+					"prerender": [
+						
+						{
+							"source": "document",
+							"where": {
+								"and": [//or
+									{ "href_matches": "/test*" },
+									{ "not": { "href_matches": "/test1*" } },
+									{ "not": { "href_matches": "/test2*" } },
+									{ "not": { "href_matches": "/test6*" } }
+								]
+							},
+							"eagerness": "moderate"
+
+						}, {
+							"source": "document",
+							"where": {
+								"and": [
+									{ "selector_matches": ".prerender" }
+								]
+							},
+							"eagerness": "immediate",	 
+						},
+						{
+							"source": "list",
+							"target_hint": "_blank",//Feature flag neeed to be enabled in Chrome currently
+							"urls": ["test6.html"],
+							"eagerness": "conservative"						
+						}
+					]
+				};
+				specScript.textContent = JSON.stringify(specRules);
+				document.body.append(specScript);
+			} else {
+				console.log('Speculation Rules Not Supported...');
+				const linkElem = document.createElement("link");
+				linkElem.rel = "prefetch";
+				linkElem.href = "/test1.html";
+				document.head.append(linkElem);
+			}
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<h1>Speculation Rules - Demo</h1>
+
+	<a href="test1.html">Test1</a><br />
+	<a href="test2.html">Test2</a><br />
+	<a href="test3.html">Test3</a><br />
+	<a href="test4.html">Test4</a><br />
+	<a href="test5.html">Test5</a><br />
+	<a href="test6.html" target="_blank">Test6</a><br />
+	<a href="https://www.albinsblog.com">External Link</a><br />
+	<a class="prerender" href="/selectormatch.html">Selector Match</a><br />
+	
+</body>
+
+</html>

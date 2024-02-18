@@ -1,0 +1,21 @@
+<script type="speculationrules">
+{
+	"prefetch": [
+		{
+			"source": "document",
+			"where": {
+				"or": [
+					{
+						"href_matches": "/test*",
+						"relative_to": "document"
+					},
+					{
+						"href_matches": "/products*",
+						"relative_to": "document"
+					}
+				]
+			}
+		}
+	]
+}
+</script>

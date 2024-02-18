@@ -1,0 +1,18 @@
+{
+  "name": "browser-storage-demos",
+  "version": "1.0.0",
+  "description": "Browser Storage Demos",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "nodemon": "^3.0.2",
+    "path": "^0.12.7"
+  }
+}
