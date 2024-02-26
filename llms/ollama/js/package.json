@@ -1,0 +1,11 @@
+{
+  "name": "myProject",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ollama": "^0.4.6"
+  }
+}
