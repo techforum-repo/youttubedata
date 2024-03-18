@@ -1,0 +1,75 @@
+body {
+    width: 500px;
+    /* Adjust this value as needed */
+    /* Add any additional styling for the popup here */
+}
+
+button {
+    /* Style for collapsible buttons */
+    background-color: #f1f1f1;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active,
+button:hover {
+    /* Style for active/hover state */
+    background-color: #ccc;
+}
+
+
+#urls {
+    max-height: 500px;
+    /* Maximum height before vertical scrollbar appears */
+    max-width: 700px;
+    /* Maximum width before horizontal scrollbar appears */
+    overflow: auto;
+    /* Enables scrollbars when content overflows */
+}
+
+#urls>div {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    /* Makes the table width expand to the full width of the popup */
+    max-width: 100%;
+    /* Ensures the table does not exceed the popup's width */
+    border-collapse: collapse;
+    /* Optional: for aesthetic appearance */
+}
+
+th,
+td {
+    padding: 8px;
+    /* Adjust padding for better cell spacing */
+    text-align: left;
+    /* Aligns text to the left; adjust as needed */
+    border: 1px solid #ddd;
+    /* Adds border to each cell; adjust color as needed */
+}
+
+/* Additional styling for header cells, if needed */
+th {
+    background-color: #c18989;
+    /* Background color for header cells */
+    color: black;
+    /* Text color for header cells */
+}
+
+
+tr:hover {background-color: #ddd;}
+
+
+.qr-code-cell, .action-cell {
+    text-align: center;
+}
