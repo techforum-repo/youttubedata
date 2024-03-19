@@ -1,1 +1,21 @@
-
+{
+    "authorUrls": {
+      "title": "Author URLs",
+      "headers": ["ENV", "URL", "QR Code", "Action"],
+      "urls": [
+        {"env":"DEV", "url":"https://www.albinsblog.com"},
+        {"env":"UAT", "url":"https://www.google.com"},
+        {"env":"Stage", "url":"https://www.test.com"}
+      ]
+    },"publisherUrls": {
+      "title": "Publish URLs",
+      "headers": ["ENV", "URL", "QR Code", "Action"],
+      "urls": [
+        {"env":"DEV", "url":"https://www.test1.com"},
+        {"env":"UAT", "url":"https://www.test2.com"},
+        {"env":"Stage", "url":"https://www.test3.com"}
+      ]
+    }
+  }
+  
+  
