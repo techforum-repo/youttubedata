@@ -57,3 +57,6 @@ ui.apps/src/main/content/jcr_root/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+browser/extentions/data_management_plugin/data.json
+

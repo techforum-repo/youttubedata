@@ -1,0 +1,121 @@
+/* Styles for export button */
+.export-button {
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative; /* Add position relative */
+    z-index: 1; /* Set z-index to keep the button above the table */
+}
+
+/* Green color for icon */
+.export-button .fa-file-excel {
+    color: #07570b; /* Green color for icon */
+    font-size: 24px; /* Increase icon size */
+}
+
+/* Other styles */
+body {
+    width: 500px;
+}
+
+button {
+    background-color: #f1f1f1;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active,
+button:hover {
+    background-color: #ccc;
+}
+
+#urls {
+    max-height: 500px;
+    max-width: 700px;
+    overflow: auto;
+    padding: 0 18px; /* Add padding to the container */
+    position: relative; /* Add position relative to the container */
+}
+
+/* Styles for table title */
+.table-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: transparent; /* Set background color to transparent by default */
+}
+
+/* Gray background for table title on hover */
+.table-title:hover {
+    background-color: #ccc;
+}
+
+/* Override background color when hovering over export button */
+.export-button:hover {
+    background-color: transparent; /* Keep background color transparent */
+}
+
+/* Adjust the following rule to target only export buttons inside table titles */
+.table-title .export-button {
+    margin-left: auto; /* Align export button to the right */
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #c18989;
+    color: black;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.qr-code-cell,
+.action-cell {
+    text-align: center;
+}
+
+/* Ensure that QR code cells have a default low z-index */
+.qr-code-cell {
+    position: relative; /* This is needed for z-index to take effect */
+    z-index: 0; /* Set default z-index to 0 */
+}
+
+/* Apply zoom effect to the QR code when hovered */
+.qr-code-cell img {
+    transition: transform 0.3s ease-in-out;
+    position: relative; /* Ensure proper stacking context */
+    z-index: 1; /* Set a baseline z-index */
+}
+
+.qr-code-cell:hover {
+    z-index: 100; /* Significantly elevate the z-index of the hovered cell */
+}
+
+.qr-code-cell:hover img {
+    transform: scale(1); /* Zoom the QR code */
+}
+
+/* Add a new rule to hide all other QR codes when one is zoomed */
+.qr-code-cell:hover ~ .qr-code-cell {
+    visibility: hidden; /* Hide all following QR code cells */
+}

@@ -1,4 +1,4 @@
-let currentExpandedTable = null; // Tracks the currently expanded table
+let currentExpandedTable = null;
 
 function createTableRow(headers, rowData) {
   const row = document.createElement('tr');
@@ -17,7 +17,7 @@ function createTableRow(headers, rowData) {
       case "QR Code":
         const qrCodeElement = document.createElement('div');
         qrCodeElement.classList.add('qr-code-cell');
-        new QRCode(qrCodeElement, {
+        const qrCodeImage = new QRCode(qrCodeElement, {
           text: rowData.url,
           width: 64,
           height: 64,
@@ -25,7 +25,19 @@ function createTableRow(headers, rowData) {
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
         });
+        qrCodeElement.dataset.qrCodeText = rowData.url; // Store QR code text data
         cell.appendChild(qrCodeElement);
+
+        // Add hover event listener to zoom QR code
+        qrCodeElement.addEventListener('mouseenter', function() {
+          qrCodeImage._el.style.transform = 'scale(2)'; // Scale QR code to 200%
+        });
+
+        // Reset QR code scale on mouse leave
+        qrCodeElement.addEventListener('mouseleave', function() {
+          qrCodeImage._el.style.transform = 'scale(1)'; // Reset scale to 100%
+        });
+
         break;
       case "Action":
         const emailButton = document.createElement('button');
@@ -47,6 +59,7 @@ function createTableRow(headers, rowData) {
   return row;
 }
 
+
 function createCollapsibleTable(tableData, isFirstTable) {
   const urlsContainer = document.getElementById('urls');
   const title = tableData.title;
@@ -62,10 +75,6 @@ function createCollapsibleTable(tableData, isFirstTable) {
   tableContainer.classList.add('content');
   urlsContainer.appendChild(collapsibleButton);
   urlsContainer.appendChild(tableContainer);
-
-  if (isFirstTable) {
-    currentExpandedTable = tableContainer;
-  }
 
   collapsibleButton.addEventListener('click', function() {
     const isExpanded = tableContainer.style.display === 'block';
@@ -83,6 +92,22 @@ function createCollapsibleTable(tableData, isFirstTable) {
       currentExpandedTable = null;
     }
   });
+
+  const exportButton = document.createElement('button');
+  exportButton.innerHTML = '<i class="fas fa-file-excel"></i>'
+  exportButton.classList.add('export-button');
+
+  // Attach click event to export button
+  exportButton.addEventListener('click', function() {
+    const table = tableContainer.querySelector('table');
+    exportToExcel(table);
+  });
+
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('export-table-buttons');
+  buttonContainer.appendChild(exportButton);
+
+  tableContainer.appendChild(buttonContainer);
 
   const table = document.createElement('table');
   table.style.borderCollapse = 'collapse';
@@ -118,5 +143,10 @@ function loadData() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  loadData();
+  loadData();  
 });
+
+function exportToExcel(table) {
+  const wb = XLSX.utils.table_to_book(table, {sheet:"Sheet1"});
+  XLSX.writeFile(wb, "table_data.xlsx");
+}
