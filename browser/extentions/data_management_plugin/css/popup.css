@@ -94,6 +94,15 @@ tr:hover {
     text-align: center;
 }
 
+.action-cell .fa-envelope {
+    color: #007bff; /* Example: Blue color for the email icon */
+  }
+  
+  .action-cell .fa-clipboard {
+    color: #28a745; /* Example: Green color for the copy icon */
+  }
+  
+
 /* Ensure that QR code cells have a default low z-index */
 .qr-code-cell {
     position: relative; /* This is needed for z-index to take effect */
@@ -119,3 +128,16 @@ tr:hover {
 .qr-code-cell:hover ~ .qr-code-cell {
     visibility: hidden; /* Hide all following QR code cells */
 }
+
+.temporary-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  

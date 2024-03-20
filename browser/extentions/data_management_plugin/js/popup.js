@@ -29,26 +29,37 @@ function createTableRow(headers, rowData) {
         cell.appendChild(qrCodeElement);
 
         // Add hover event listener to zoom QR code
-        qrCodeElement.addEventListener('mouseenter', function() {
+        qrCodeElement.addEventListener('mouseenter', function () {
           qrCodeImage._el.style.transform = 'scale(2)'; // Scale QR code to 200%
         });
 
         // Reset QR code scale on mouse leave
-        qrCodeElement.addEventListener('mouseleave', function() {
+        qrCodeElement.addEventListener('mouseleave', function () {
           qrCodeImage._el.style.transform = 'scale(1)'; // Reset scale to 100%
         });
 
         break;
-      case "Action":
-        const emailButton = document.createElement('button');
-        emailButton.classList.add('action-cell');
-        emailButton.textContent = 'Email URL';
-        emailButton.onclick = function() {
-          const emailBody = `Here is the URL: ${rowData.url}`;
-          window.open(`mailto:?subject=${rowData.env} URL&body=${encodeURIComponent(emailBody)}`);
-        };
-        cell.appendChild(emailButton);
-        break;
+        case "Action":
+          // Email Button with Font Awesome Icon
+          const emailButton = document.createElement('button');
+          emailButton.classList.add('action-cell');
+          emailButton.innerHTML = '<i class="fas fa-envelope"></i>'; // Using Font Awesome icon
+          emailButton.onclick = function() {
+            const emailBody = `Here is the URL: ${rowData.url}`;
+            window.open(`mailto:?subject=${rowData.env} URL&body=${encodeURIComponent(emailBody)}`);
+          };
+          cell.appendChild(emailButton);
+  
+          // Copy URL Button with Font Awesome Icon
+          const copyButton = document.createElement('button');
+          copyButton.classList.add('action-cell');
+          copyButton.innerHTML = '<i class="fas fa-clipboard"></i>'; // Using Font Awesome icon
+          copyButton.onclick = function() {
+            navigator.clipboard.writeText(rowData.url)
+              .then(() => showTemporaryMessage("URL copied to clipboard!"));
+          };
+          cell.appendChild(copyButton);
+          break;
       default:
         cell.textContent = rowData[header.toLowerCase()] || '';
     }
@@ -76,7 +87,7 @@ function createCollapsibleTable(tableData, isFirstTable) {
   urlsContainer.appendChild(collapsibleButton);
   urlsContainer.appendChild(tableContainer);
 
-  collapsibleButton.addEventListener('click', function() {
+  collapsibleButton.addEventListener('click', function () {
     const isExpanded = tableContainer.style.display === 'block';
     if (!isExpanded) {
       if (currentExpandedTable) {
@@ -98,7 +109,7 @@ function createCollapsibleTable(tableData, isFirstTable) {
   exportButton.classList.add('export-button');
 
   // Attach click event to export button
-  exportButton.addEventListener('click', function() {
+  exportButton.addEventListener('click', function () {
     const table = tableContainer.querySelector('table');
     exportToExcel(table);
   });
@@ -142,11 +153,23 @@ function loadData() {
     .catch(error => console.error('Error loading JSON data:', error));
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  loadData();  
+document.addEventListener('DOMContentLoaded', function () {
+  loadData();
 });
 
 function exportToExcel(table) {
-  const wb = XLSX.utils.table_to_book(table, {sheet:"Sheet1"});
+  const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
   XLSX.writeFile(wb, "table_data.xlsx");
 }
+
+function showTemporaryMessage(message) {
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  messageDiv.classList.add('temporary-message'); // Add CSS class for styling
+  document.body.appendChild(messageDiv);
+
+  setTimeout(() => {
+    messageDiv.remove();
+  }, 3000); // Removes the message after 3000 milliseconds (3 seconds)
+}
+

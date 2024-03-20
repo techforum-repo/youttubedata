@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Manage Data",
+  "name": "Manage My Data",
   "version": "1.0",
   "permissions": ["tabs"],
   "action": {
