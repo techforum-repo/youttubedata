@@ -46,7 +46,7 @@ function createTableRow(headers, rowData) {
           emailButton.innerHTML = '<i class="fas fa-envelope"></i>'; // Using Font Awesome icon
           emailButton.onclick = function() {
             const emailBody = `Here is the URL: ${rowData.url}`;
-            window.open(`mailto:?subject=${rowData.env} URL&body=${encodeURIComponent(emailBody)}`);
+            window.open(`mailto:?subject=${rowData.env || rowData.type} URL&body=${encodeURIComponent(emailBody)}`);
           };
           cell.appendChild(emailButton);
   
