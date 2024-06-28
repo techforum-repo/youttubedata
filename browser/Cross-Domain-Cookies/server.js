@@ -23,7 +23,7 @@ app.use(
   "/api",
   createProxyMiddleware({
     //target: "https://test.api.com:8081",
-	target: "https://test.synvie.de:8081",
+	target: "https://test.api.com:8081",
     changeOrigin: true,
     pathRewrite: { "^/api": "" },
     secure: false, // Allow self-signed certificates
