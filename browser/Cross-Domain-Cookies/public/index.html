@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Domain Cookie Test</title>
+</head>
+<body>
+    <h1>Cross-Domain Cookie Test</h1>
+    <button id="invoke-button">Invoke API</button>
+    <button id="check-cookie-button">Check Cookie</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('invoke-button').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/', {
+                    method: 'GET',
+                    credentials: 'include' // Important to include credentials
+                });
+
+                const data = await response.text();
+                console.log('Fetch Cookie response:', data); // Add logging
+                document.getElementById('result').innerText = `Response: ${data}`;
+            } catch (error) {
+                console.error('Fetch Cookie error:', error);
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        });
+
+        document.getElementById('check-cookie-button').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/check', {
+                    method: 'GET',
+                    credentials: 'include' // Important to include credentials
+                });
+
+                const data = await response.text();
+                console.log('Check Cookie response:', data); // Add logging
+                document.getElementById('result').innerText = `Response: ${data}`;
+            } catch (error) {
+                console.error('Check Cookie error:', error);
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
