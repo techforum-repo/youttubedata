@@ -1,0 +1,7 @@
+flask
+requests
+nltk
+sentence-transformers
+pymongo
+scikit-learn
+faiss-cpu

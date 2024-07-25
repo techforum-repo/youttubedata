@@ -5,6 +5,23 @@
 *.ear
 hs_err_pid*
 
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore the Faiss index binary file (if not required to be versioned)
+faiss_index.bin
+
+# Ignore other temporary or log files
+*.log
+
+# Ignore virtual environment directories
+venv/
+env/
+
+
+
+
 # Maven
 target/
 pom.xml.tag
