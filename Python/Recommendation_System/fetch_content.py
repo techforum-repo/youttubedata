@@ -21,7 +21,8 @@ AEM_CONTENT_PATH = "/content/wknd/us/en"
 AEM_QUERY_URL = f"{AEM_BASE_URL}/bin/querybuilder.json?path={AEM_CONTENT_PATH}&type=cq%3aPage&p.properties=jcr%3acontent/jcr%3adescription&p.limit=-1"
 MODEL_NAME = 'all-MiniLM-L6-v2'
 
-# Initialize Sentence Transformer model
+# Initialize the Sentence Transformer model, forcing it to use the CPU.
+# You can remove the device parameter to allow automatic device selection (CPU or GPU).
 model = SentenceTransformer(MODEL_NAME, device='cpu')
 
 def fetch_aem_content():
