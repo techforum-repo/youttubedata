@@ -22,7 +22,7 @@ with open("content_id_map.json", "r") as f:
 print("Content ID Map (first 10):", {i: content_id_map[str(i)] for i in range(10)})
 
 # Initialize MongoDB client
-client = MongoClient("mongodb+srv://cmscontent:Cmscontent123!@cluster0.1qriowr.mongodb.net/")
+client = MongoClient("<<Mongodb connect string>>")
 db = client['cms_content']
 content_collection = db['content_embeddings']
 
