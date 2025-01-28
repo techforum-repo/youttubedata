@@ -1,0 +1,17 @@
+.spectrum-InputGroup-popover {
+    left: 0 !important; /* Align with the ComboBox input */   
+}
+
+.customdropdown-field-wrapper {
+    display: flex; /* Use flexbox for layout alignment */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start of the container */
+    width: 100%; /* Ensure the wrapper takes full width */
+    margin-bottom: 16px; /* Add spacing below the field */
+    padding: 8px; /* Add internal padding for better spacing */
+    background-color: #f9f9f9; /* Optional: Light background for visibility */
+    border: 1px solid #ddd; /* Optional: Add a subtle border */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    box-sizing: border-box; /* Include padding and border in the dimensions */
+}
+

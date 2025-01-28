@@ -1,0 +1,7 @@
+operations:
+  view:
+    - type: web
+      impl: index.html
+web: web-src
+hooks:
+  post-app-deploy: ./hooks/post-deploy.js

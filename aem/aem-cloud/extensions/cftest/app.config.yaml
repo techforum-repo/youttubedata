@@ -1,0 +1,3 @@
+extensions:
+  aem/cf-editor/1:
+    $include: src/aem-cf-editor-1/ext.config.yaml

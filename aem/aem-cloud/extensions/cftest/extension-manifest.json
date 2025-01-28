@@ -1,0 +1,6 @@
+{
+  "name": "CustomField",
+  "id": "customfield",
+  "description": "Enable CustomField for the CF Model",
+  "version": "0.0.1"
+}
