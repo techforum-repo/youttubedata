@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@adobe/aio-sdk": "^3.0.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "node-fetch": "^2.6.0",
     "react-fast-compare": "^3.0.1",
     "react-router": "^5.1.2",
