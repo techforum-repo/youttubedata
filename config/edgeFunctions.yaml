@@ -1,0 +1,11 @@
+kind: "EdgeFunctions"
+version: "1"
+data:
+  functions:
+    - name: my-edge-function
+  # Uncomment to enable secrets
+  # secrets:
+  #   - key: API_TOKEN
+  #     value: ${{ API_TOKEN_SECRET }}
+  # Uncomment to enable a KV store
+  # kvs: true

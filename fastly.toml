@@ -1,0 +1,31 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = []
+cloned_from = "https://github.com/fastly/compute-starter-kit-javascript-empty"
+description = "Simple AEM Edge Functions Boilerplate"
+language = "javascript"
+manifest_version = 3
+name = "aem-edge-functions-boilerplate"
+service_id = ""
+
+[scripts]
+  build = "npm run build"
+  post_init = "npm install"
+
+[local_server]
+  [local_server.backends]
+    [local_server.backends.open-meteo]
+      url = "https://api.open-meteo.com"
+
+  [local_server.config_stores]
+    [local_server.config_stores.config_default]
+      format = "inline-toml"
+    [local_server.config_stores.config_default.contents]
+      LOG_LEVEL = "debug"
+
+  [local_server.secret_stores]
+    [[local_server.secret_stores.secret_default]]
+      key = "API_TOKEN"
+      data = "helloworld"
+
