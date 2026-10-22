@@ -1,0 +1,16 @@
+<!-- html-element-demo.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Element Demo</title>
+	<link rel="stylesheet" href="styles.css">
+   <script type="text/javascript" src="html-include.js"></script>	
+   <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <h2>Inside Embed</h2>
+	<button type="button" id="embed" onclick="display()">Click me Embed</button>
+	<button type="button" id="test" onclick="display_embed()">Click me Embed Test</button>
+	<html-include src="http://localhost:8080/target.html" ></html-include>
+  </body>
+</html>
