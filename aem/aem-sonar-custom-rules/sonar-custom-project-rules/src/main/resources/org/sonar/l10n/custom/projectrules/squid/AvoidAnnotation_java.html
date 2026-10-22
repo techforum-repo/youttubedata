@@ -1,0 +1,32 @@
+<p>This rule detects usage of configured annotation</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class AvoidAnnotationCheck {
+
+  int aField;
+
+  @MyAnnotation
+  public void aMethod() {
+
+  }
+
+  @Test // Noncompliant {{Avoid using annotation @Test}}
+  public void aMethod() {
+
+  }
+
+} 
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class AvoidAnnotationCheck {
+
+  int aField;
+
+  @MyAnnotation
+  public void aMethod() {
+
+  } 
+
+}
+</pre>

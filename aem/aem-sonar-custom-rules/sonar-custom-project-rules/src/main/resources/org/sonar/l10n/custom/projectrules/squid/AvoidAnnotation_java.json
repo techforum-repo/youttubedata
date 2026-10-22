@@ -1,0 +1,13 @@
+{
+  "title": "Avoid Annotation with name Test",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall","customjava"
+  ],
+  "defaultSeverity": "Minor"
+}
