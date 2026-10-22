@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/project2/clientlibs"/>
+    <filter root="/apps/project2/components"/>
+    <filter root="/apps/project2/i18n"/>
+</workspaceFilter>
